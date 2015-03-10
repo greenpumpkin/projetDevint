@@ -1,9 +1,12 @@
 package com.devint.cindy.speedmemory;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class HelpActivity extends ActionBarActivity {
@@ -12,6 +15,16 @@ public class HelpActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+
+        final Button buttonHelp = (android.widget.Button) findViewById(R.id.button3);
+        buttonHelp.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HelpActivity.this, GameActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
