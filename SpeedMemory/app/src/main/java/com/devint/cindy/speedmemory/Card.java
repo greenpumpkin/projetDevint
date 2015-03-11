@@ -7,20 +7,22 @@ package com.devint.cindy.speedmemory;
 
 public class Card {
 
-    private String url;
+    private String audioName;
     private String color;
     private int id;
     private boolean isReturned;
 
-    public Card(int id,String url) {
+    public Card(int id,String audioName) {
         this.id = id;
-        this.url = url;
+        this.audioName = audioName;
         isReturned = false;
     }
 
-    public String getUrl() {
-        return this.url;
+    public String getAudioName() {
+        return this.audioName;
     }
-
+    public int getId() {
+        return this.id;
+    }
 
 }

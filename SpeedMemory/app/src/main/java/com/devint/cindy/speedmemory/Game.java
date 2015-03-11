@@ -3,7 +3,8 @@ package com.devint.cindy.speedmemory;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.media.AsyncPlayer;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.content.Context;
 import android.net.Uri;
 
@@ -12,16 +13,28 @@ import android.net.Uri;
  */
 public class Game {
 
-    AsyncPlayer ap;
     List<Card> cards;
 
     public Game(){
-        ap = new AsyncPlayer("player");
         cards = new ArrayList<Card>();
     }
     public void playSound(Card card, Context context){
-        Uri path = Uri.parse(card.getUrl());
-        //ap.play(context,path,false,);//TODO
+        /*Uri myUri = Uri.parse("../../../../../res/raw" + card.getAudioName()); // initialize Uri here
+
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try {
+            mediaPlayer.setDataSource(context, myUri);
+            mediaPlayer.prepare();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        mediaPlayer.start();*/
+        MediaPlayer mediaPlayer = MediaPlayer.create(context, card.getId());
+        mediaPlayer.start();
+
+
     }
 
     public Card getCard(int num){

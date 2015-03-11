@@ -9,10 +9,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="COMMENCER !"
-        android:textSize="48dp"
+        android:textSize="46dp"
         android:textAlignment="center"
-        android:id="@+id/button"
+        android:id="@+id/commencer"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Options"
+        android:textSize="46dp"
+        android:textAlignment="center"
+        android:id="@+id/options"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="83dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modes de Jeu"
+        android:textSize="46dp"
+        android:textAlignment="center"
+        android:id="@+id/modesDeJeu"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/commencer" />
 
 </RelativeLayout>
