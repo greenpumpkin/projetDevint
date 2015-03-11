@@ -7,15 +7,19 @@ package com.devint.cindy.speedmemory;
 
 public class Card {
 
-    private String uri;
-    private int position;
+    private String url;
     private String color;
     private int id;
-    private boolean isReturned = false;
+    private boolean isReturned;
 
-    public Card(int position,int id) {
-        this.position = position;
+    public Card(int id,String url) {
         this.id = id;
+        this.url = url;
+        isReturned = false;
+    }
+
+    public String getUrl(){
+        return this.url;
     }
 
 
