@@ -16,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button buttonSuiv = (android.widget.Button) findViewById(R.id.button);
+        final Button buttonSuiv = (android.widget.Button) findViewById(R.id.commencer);
         buttonSuiv.setOnClickListener(new View.OnClickListener() {
 
             @Override
