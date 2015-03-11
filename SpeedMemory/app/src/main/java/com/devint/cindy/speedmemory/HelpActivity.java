@@ -16,12 +16,12 @@ public class HelpActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        final Button buttonHelp = (android.widget.Button) findViewById(R.id.button3);
+        final Button buttonHelp = (android.widget.Button) findViewById(R.id.button2);
         buttonHelp.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HelpActivity.this, GameActivity.class);
+                Intent intent = new Intent(HelpActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
