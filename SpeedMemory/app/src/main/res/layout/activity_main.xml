@@ -8,32 +8,32 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="COMMENCER !"
-        android:textSize="46dp"
+        android:text="COMMENCER"
+        android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/commencer"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/modesDeJeu"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Options"
-        android:textSize="46dp"
+        android:text="OPTIONS"
+        android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/options"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="83dp" />
+        android:layout_below="@+id/modesDeJeu"
+        android:layout_alignRight="@+id/modesDeJeu"
+        android:layout_alignEnd="@+id/modesDeJeu" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Modes de Jeu"
-        android:textSize="46dp"
+        android:text="MODE DE JEU"
+        android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/modesDeJeu"
-        android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/commencer" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
