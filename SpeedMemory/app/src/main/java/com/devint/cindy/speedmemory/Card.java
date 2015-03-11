@@ -7,12 +7,13 @@ package com.devint.cindy.speedmemory;
 public class Card {
 
     private int position;
-    private int numCard;
+    private String color;
     private boolean isReturned = false;
+    //+ attribut pour le son
 
-    public Card(int position,int numCard) {
+    public Card(int position,String color) {
         this.position = position;
-        this.numCard = numCard;
+        this.color = color;
     }
 
 
