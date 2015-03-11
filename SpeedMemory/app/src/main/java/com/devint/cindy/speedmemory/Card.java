@@ -18,7 +18,7 @@ public class Card {
         isReturned = false;
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return this.url;
     }
 

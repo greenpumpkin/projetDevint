@@ -1,4 +1,4 @@
-package com.devint.cindy.speedmemory;
+ package com.devint.cindy.speedmemory;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +13,7 @@ import android.widget.Chronometer;
 public class GameActivity extends ActionBarActivity {
 
     private Chronometer chrono;
+    private Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,8 @@ public class GameActivity extends ActionBarActivity {
 
         chrono = (Chronometer)findViewById(R.id.chronometer);
         chrono.start();
+        game = new Game();
+        game.playSound(game.getCard(0),getApplicationContext());//TODO
 
         final Button buttonHelp = (android.widget.Button) findViewById(R.id.button2);
         buttonHelp.setOnClickListener(new View.OnClickListener() {
