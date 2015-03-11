@@ -23,8 +23,7 @@
         android:textAlignment="center"
         android:id="@+id/options"
         android:layout_below="@+id/modesDeJeu"
-        android:layout_alignRight="@+id/modesDeJeu"
-        android:layout_alignEnd="@+id/modesDeJeu" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
