@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 
@@ -24,16 +25,15 @@ import java.util.List;
 public class GameActivity extends ActionBarActivity {
 
     private Chronometer chrono;
-    private GridView grid;
-    private List listImages = new ArrayList();
+    private GridLayout gridLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        grid = (GridView)findViewById(R.id.gridView);
-        grid.setAdapter(new ImageAdapter(this));
+        gridLayout = (GridLayout)findViewById(R.id.gridLayout);
+
         chrono = (Chronometer)findViewById(R.id.chronometer);
         chrono.start();
 
@@ -61,51 +61,5 @@ public class GameActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    public class ImageAdapter extends BaseAdapter {
-        private Context mContext;
-
-        public ImageAdapter(Context c) {
-            mContext = c;
-        }
-
-        public int getCount() {
-            return mThumbIds.length;
-        }
-
-        public Object getItem(int position) {
-            return null;
-        }
-
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        // create a new ImageView for each item referenced by the Adapter
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            ImageView imageView;
-            if (convertView == null) {  // if it's not recycled, initialize some attributes
-                imageView = new ImageView(mContext);
-                imageView.setLayoutParams(new GridView.LayoutParams(215, 215));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setPadding(8, 8, 8, 8);
-            } else {
-                imageView = (ImageView) convertView;
-            }
-
-            imageView.setImageResource(mThumbIds[position]);
-            return imageView;
-        }
-
-        // references to our images
-        private Integer[] mThumbIds = {
-                R.drawable.speed_memory_card,
-                R.drawable.speed_memory_card,
-                R.drawable.speed_memory_card,
-                R.drawable.speed_memory_card,
-                R.drawable.speed_memory_card,
-                R.drawable.speed_memory_card
-        };
     }
 }
