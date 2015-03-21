@@ -1,21 +1,24 @@
 package com.devint.cindy.speedmemory;
 
 
+import android.widget.Button;
+
 /**
  * Created by Cindy Najjar on 10/03/15.
  */
 
 public class Card {
 
+    public int x;
+    public int y;
+    public Button button;
     private String audioName;
-    private String color;
     private int id;
-    private boolean isReturned;
 
-    public Card(int id,String audioName) {
-        this.id = id;
-        this.audioName = audioName;
-        isReturned = false;
+    public Card(Button button, int x,int y) {
+        this.x = x;
+        this.y=y;
+        this.button=button;
     }
 
     public String getAudioName() {
