@@ -30,7 +30,8 @@
                 android:layout_height="153dp"
                 android:layout_width="153dp"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+            android:clickable="true" />
 
         <ImageView
             android:id="@+id/carte2"

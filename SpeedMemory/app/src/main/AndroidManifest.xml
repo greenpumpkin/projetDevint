@@ -28,6 +28,11 @@
             android:screenOrientation="landscape"
             android:label="@string/title_activity_help" >
         </activity>
+        <activity
+            android:name=".ModeDeJeuActivity"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_ModeJeu" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />

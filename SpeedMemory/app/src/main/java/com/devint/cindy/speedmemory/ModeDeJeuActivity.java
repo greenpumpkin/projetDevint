@@ -1,32 +1,33 @@
 package com.devint.cindy.speedmemory;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
-public class HelpActivity extends ActionBarActivity {
+/**
+ * Created by user on 25/03/15.
+ */
+public class ModeDeJeuActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help);
+        setContentView(R.layout.activity_modedejeu);
 
         final Button buttonRetour = (android.widget.Button) findViewById(R.id.button3);
         buttonRetour.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HelpActivity.this, MainActivity.class);
+                Intent intent = new Intent(ModeDeJeuActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -6,4 +6,5 @@
     <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_ModeJeu">ModeDejeuActivity</string>
 </resources>
