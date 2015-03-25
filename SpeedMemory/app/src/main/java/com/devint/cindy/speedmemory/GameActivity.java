@@ -34,6 +34,7 @@ public class GameActivity extends ActionBarActivity {
     private int heightCarte, widthCarte;
     private Button b1, b2, b3, b4, b5, b6;
     private HashMap<Integer, Card> listeDesCouleurs = new HashMap<>();
+    private Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +43,19 @@ public class GameActivity extends ActionBarActivity {
         setContentView(R.layout.activity_game);
 
         b1 = (Button) findViewById(R.id.carte1);
-        listeDesCouleurs.put(b1.getId(), new Card(b1,b1.getId(),Color.BLUE));
+        listeDesCouleurs.put(b1.getId(), new Card(b1,b1.getId()));
         b2 = (Button) findViewById(R.id.carte2);
-        listeDesCouleurs.put(b2.getId(), new Card(b2,b2.getId(),Color.BLUE));
+        listeDesCouleurs.put(b2.getId(), new Card(b2,b2.getId()));
         b3 = (Button) findViewById(R.id.carte3);
-        listeDesCouleurs.put(b3.getId(), new Card(b3,b3.getId(),Color.GREEN));
+        listeDesCouleurs.put(b3.getId(), new Card(b3,b3.getId()));
         b4 = (Button) findViewById(R.id.carte4);
-        listeDesCouleurs.put(b4.getId(), new Card(b4,b4.getId(),Color.GREEN));
+        listeDesCouleurs.put(b4.getId(), new Card(b4,b4.getId()));
         b5 = (Button) findViewById(R.id.carte5);
-        listeDesCouleurs.put(b5.getId(), new Card(b5,b5.getId(),Color.RED));
+        listeDesCouleurs.put(b5.getId(), new Card(b5,b5.getId()));
         b6 = (Button) findViewById(R.id.carte6);
-        listeDesCouleurs.put(b6.getId(), new Card(b6,b6.getId(),Color.BLUE));
+        listeDesCouleurs.put(b6.getId(), new Card(b6,b6.getId()));
+
+        melangeCartes(listeDesCouleurs, random);
 
         gridLayout = (GridLayout) findViewById(R.id.gridLayout);
         Display display = getWindowManager().getDefaultDisplay();
@@ -125,17 +128,31 @@ public class GameActivity extends ActionBarActivity {
     }
 
     private void melangeCartes(HashMap<Integer,Card> map, Random r) {
-        r = new Random();
 
-        Couleur bleu = new Couleur(Color.BLUE,2);
-        Couleur rouge = new Couleur(Color.RED,2);
-        Couleur vert = new Couleur(Color.GREEN,2);
+        Couleur bleu = new Couleur(Color.BLUE);
+        Couleur rouge = new Couleur(Color.RED);
+        Couleur vert = new Couleur(Color.GREEN);
 
         ArrayList<Couleur> listeCouleurs = new ArrayList<Couleur>();
         listeCouleurs.add(bleu);
         listeCouleurs.add(rouge);
         listeCouleurs.add(vert);
 
+        for (Card carte : map.values()) {
+
+
+            int indiceRandom = r.nextInt(listeCouleurs.size());
+            Couleur c = listeCouleurs.get(indiceRandom);
+            int reste = c.getReste();
+            c.setReste(--reste);
+
+            if (c.getReste() == 0) {
+                listeCouleurs.remove(indiceRandom);
+            }
+
+            carte.setColor(c.getColor());
+
+        }
     }
 
     private class ClickActionListener implements View.OnClickListener {
@@ -156,15 +173,39 @@ public class GameActivity extends ActionBarActivity {
             countDownTimer = new CountDownTimer(5000,1) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-
+                    bloquerBouton(getBoutonNonUtilise(tmp.getId()));
                 }
 
                 @Override
                 public void onFinish() {
                     tmp.setBackgroundColor(Color.GRAY);
+                    deBloquerBouton(getBoutonNonUtilise(tmp.getId()));
                 }
             }.start();
 
+        }
+
+        private HashMap<Integer, Card> getBoutonNonUtilise(int id) {
+            HashMap<Integer, Card> ret = new HashMap<>();
+            for(Card c : listeDesCouleurs.values()) {
+                if(c.getId() != id)
+                    ret.put(id, c);
+            }
+            return ret;
+        }
+
+        private void bloquerBouton(HashMap<Integer, Card> map) {
+            for(Card c : listeDesCouleurs.values()) {
+                Button tmp = (Button) findViewById(c.getId());
+                tmp.setEnabled(false);
+            }
+        }
+
+        private void deBloquerBouton(HashMap<Integer, Card> map) {
+            for(Card c : listeDesCouleurs.values()) {
+                Button tmp = (Button) findViewById(c.getId());
+                tmp.setEnabled(true);
+            }
         }
     }
 }

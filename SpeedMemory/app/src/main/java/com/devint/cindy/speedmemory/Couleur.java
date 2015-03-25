@@ -9,13 +9,14 @@ public class Couleur {
     private int color;
     private int reste = 2;
 
-    public Couleur(int color, int reste) {
+    public Couleur(int color) {
         this.color = color;
-        this.reste = reste;
     }
 
+    public int getReste() { return this.reste; }
     public void setReste(int reste) {
         this.reste = reste;
     }
 
+    public int getColor() { return this.color; }
 }

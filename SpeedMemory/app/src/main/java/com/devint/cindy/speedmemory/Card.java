@@ -13,6 +13,7 @@ public class Card {
     private int audioId;
     private int color;
     private int id;
+    private boolean isColored = false;
 
 
     public Card(Button button, int id, int color) {
@@ -28,9 +29,16 @@ public class Card {
         this.audioId = audioId;
     }
 
+    public Card(Button button, int id) {
+        this.button=button;
+        this.id = id;
+    }
+
     public int getColor() {
         return this.color;
     }
+
+    public void setColor(int color) { this.color = color; }
 
     public int getAudioId() {
         return this.audioId;
@@ -40,4 +48,7 @@ public class Card {
         return this.id;
     }
 
+    public void setColored(boolean isColored) { this.isColored = isColored; }
+
+    public boolean isColored() { return isColored; }
 }
