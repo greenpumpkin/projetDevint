@@ -10,7 +10,7 @@ import android.widget.Button;
 public class Card {
 
     public Button button;
-    private String audioName;
+    private int audioId;
     private int color;
     private int id;
 
@@ -21,20 +21,21 @@ public class Card {
         this.id = id;
     }
 
-    public Card(Button button, int id, int color, String audioName) {
+    public Card(Button button, int id, int color, int audioId) {
         this.button=button;
         this.color = color;
         this.id = id;
-        this.audioName = audioName;
+        this.audioId = audioId;
     }
 
     public int getColor() {
         return this.color;
     }
 
-    public String getAudioName() {
-        return this.audioName;
+    public int getAudioId() {
+        return this.audioId;
     }
+
     public int getId() {
         return this.id;
     }

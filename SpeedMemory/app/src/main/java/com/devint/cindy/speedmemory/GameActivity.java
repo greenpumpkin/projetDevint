@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+
 public class GameActivity extends ActionBarActivity {
 
     private GridLayout gridLayout;
@@ -120,6 +122,20 @@ public class GameActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void melangeCartes(HashMap<Integer,Card> map, Random r) {
+        r = new Random();
+
+        Couleur bleu = new Couleur(Color.BLUE,2);
+        Couleur rouge = new Couleur(Color.RED,2);
+        Couleur vert = new Couleur(Color.GREEN,2);
+
+        ArrayList<Couleur> listeCouleurs = new ArrayList<Couleur>();
+        listeCouleurs.add(bleu);
+        listeCouleurs.add(rouge);
+        listeCouleurs.add(vert);
+
     }
 
     private class ClickActionListener implements View.OnClickListener {
