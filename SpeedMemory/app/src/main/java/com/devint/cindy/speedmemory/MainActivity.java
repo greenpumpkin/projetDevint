@@ -54,16 +54,6 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-
-        final Button buttonModeJeu = (android.widget.Button) findViewById(R.id.modesDeJeu);
-        buttonModeJeu.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ModeDeJeuActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
