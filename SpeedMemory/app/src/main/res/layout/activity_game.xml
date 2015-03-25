@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:columnCount="3"
         android:rowCount="2">
+
         <Button
             android:id="@+id/carte1"
             android:text="SPEED\n MEMORY"

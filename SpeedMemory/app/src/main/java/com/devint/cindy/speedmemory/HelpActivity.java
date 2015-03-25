@@ -16,8 +16,8 @@ public class HelpActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        final Button buttonHelp = (android.widget.Button) findViewById(R.id.button3);
-        buttonHelp.setOnClickListener(new View.OnClickListener() {
+        final Button buttonRetour = (android.widget.Button) findViewById(R.id.button3);
+        buttonRetour.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
