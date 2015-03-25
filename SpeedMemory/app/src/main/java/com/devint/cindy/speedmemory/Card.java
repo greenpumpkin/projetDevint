@@ -9,16 +9,27 @@ import android.widget.Button;
 
 public class Card {
 
-    public int x;
-    public int y;
     public Button button;
     private String audioName;
+    private int color;
     private int id;
 
-    public Card(Button button, int x,int y) {
-        this.x = x;
-        this.y=y;
+
+    public Card(Button button, int id, int color) {
         this.button=button;
+        this.color = color;
+        this.id = id;
+    }
+
+    public Card(Button button, int id, int color, String audioName) {
+        this.button=button;
+        this.color = color;
+        this.id = id;
+        this.audioName = audioName;
+    }
+
+    public int getColor() {
+        return this.color;
     }
 
     public String getAudioName() {
