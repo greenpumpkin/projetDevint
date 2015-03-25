@@ -16,36 +16,42 @@
         <Button
             android:id="@+id/carte1"
             android:text="SPEED\n MEMORY"
+            android:textSize="35px"
             android:layout_margin="10dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
         <Button
             android:id="@+id/carte2"
             android:text="SPEED\n MEMORY"
+            android:textSize="35px"
             android:layout_margin="10dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
         <Button
             android:id="@+id/carte3"
             android:text="SPEED\n MEMORY"
+            android:textSize="35px"
             android:layout_margin="10dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
         <Button
             android:id="@+id/carte4"
             android:text="SPEED\n MEMORY"
+            android:textSize="35px"
             android:layout_margin="10dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
         <Button
             android:id="@+id/carte5"
             android:text="SPEED\n MEMORY"
+            android:textSize="35px"
             android:layout_margin="10dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
         <Button
             android:id="@+id/carte6"
             android:text="SPEED\n MEMORY"
+            android:textSize="35px"
             android:layout_margin="10dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>

@@ -87,15 +87,13 @@ public class GameActivity extends ActionBarActivity {
         b5.setBackgroundColor(Color.GRAY);
         b6.setBackgroundColor(Color.GRAY);
 
-        /**Typeface font = Typeface.createFromAsset(getAssets(),"Megalopolis.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(),"Megalopolis.ttf");
         b1.setTypeface(font);
         b2.setTypeface(font);
         b3.setTypeface(font);
         b4.setTypeface(font);
         b5.setTypeface(font);
-        b6.setTypeface(font);**/
-
-
+        b6.setTypeface(font);
 
         b1.setOnClickListener(new ClickActionListener());
         b2.setOnClickListener(new ClickActionListener());
