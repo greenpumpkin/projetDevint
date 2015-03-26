@@ -35,6 +35,7 @@ public class GameActivity extends ActionBarActivity {
     private Button b1, b2, b3, b4, b5, b6;
     private HashMap<Integer, Card> listeDesCouleurs = new HashMap<>();
     private Random random = new Random();
+    private ArrayList<Integer> identifiants = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,8 +159,18 @@ public class GameActivity extends ActionBarActivity {
         @Override
         public void onClick(View v) {
 
-            int id = v.getId();
-            tournerCarte(id);
+            tournerCarte(v.getId());
+
+            if (identifiants.size() < 2) {
+                int id = v.getId();
+                identifiants.add(id);
+            }
+
+            if (identifiants.size() == 2) {
+                checkCartesIdentiques(identifiants.get(0),identifiants.get(1));
+                identifiants.remove(0);
+                identifiants.remove(1);
+            }
 
         }
 
@@ -171,13 +182,13 @@ public class GameActivity extends ActionBarActivity {
             countDownTimer = new CountDownTimer(5000,1) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    bloquerBouton(getBoutonNonUtilise(tmp.getId()));
+                    //bloquerBouton(getBoutonNonUtilise(tmp.getId()));
                 }
 
                 @Override
                 public void onFinish() {
-                    tmp.setBackgroundColor(Color.GRAY);
-                    deBloquerBouton(getBoutonNonUtilise(tmp.getId()));
+                    //tmp.setBackgroundColor(Color.GRAY);
+                    //deBloquerBouton(getBoutonNonUtilise(tmp.getId()));
                 }
             }.start();
 
@@ -203,6 +214,16 @@ public class GameActivity extends ActionBarActivity {
             for(Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
                 tmp.setEnabled(true);
+            }
+        }
+
+        private void checkCartesIdentiques(int id1, int id2) {
+            Button tmp1 = (Button) findViewById(id1);
+            Button tmp2 = (Button) findViewById(id2);
+
+            if (listeDesCouleurs.get(id1).getColor() != listeDesCouleurs.get(id2).getColor()) {
+                tmp1.setBackgroundColor(Color.GRAY);
+                tmp2.setBackgroundColor(Color.GRAY);
             }
         }
     }
