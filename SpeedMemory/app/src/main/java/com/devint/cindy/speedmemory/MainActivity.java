@@ -8,12 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    private int result;
     private TextToSpeech textToSpeech;
 
     @Override
@@ -21,11 +23,14 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      /**  textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                if(status != TextToSpeech.ERROR){
-                    textToSpeech.setLanguage(Locale.FRANCE);
+                if(status == TextToSpeech.SUCCESS){
+                    result = textToSpeech.setLanguage(Locale.FRANCE);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Votre appareil ne supporte pas cette version", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -33,13 +38,19 @@ public class MainActivity extends ActionBarActivity {
         textToSpeech.setLanguage(Locale.FRANCE);
         String bienvenue = "Bienvenue dans speed memory";
         textToSpeech.stop();
-        textToSpeech.speak(bienvenue, TextToSpeech.QUEUE_FLUSH, null); **/
+        textToSpeech.speak(bienvenue, TextToSpeech.QUEUE_FLUSH, null);
 
         final Button buttonSuiv = (android.widget.Button) findViewById(R.id.commencer);
         buttonSuiv.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                if(result == TextToSpeech.LANG_NOT_SUPPORTED || result == TextToSpeech.LANG_MISSING_DATA) {
+                    Toast.makeText(getApplicationContext(), "Votre appareil ne supporte pas cette version", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    textToSpeech.speak("Commencer jeu", TextToSpeech.QUEUE_FLUSH, null);
+                }
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
@@ -50,6 +61,12 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
+                if(result == TextToSpeech.LANG_NOT_SUPPORTED || result == TextToSpeech.LANG_MISSING_DATA) {
+                    Toast.makeText(getApplicationContext(), "Votre appareil ne supporte pas cette version", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    textToSpeech.speak("Options du jeu", TextToSpeech.QUEUE_FLUSH, null);
+                }
                 Intent intent = new Intent(MainActivity.this, HelpActivity.class);
                 startActivity(intent);
             }
