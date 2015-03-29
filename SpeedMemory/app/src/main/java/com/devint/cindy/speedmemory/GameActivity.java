@@ -218,12 +218,12 @@ public class GameActivity extends ActionBarActivity {
         }
 
         private void checkCartesIdentiques() {
-            if (listeDesCouleurs.get(identifiants.get(0).getId()).getColor() != listeDesCouleurs.get(identifiants.get(1).getId()).getColor()) {
+
+            int id1 = identifiants.get(0).getId();
+            int id2 = identifiants.get(1).getId();
+            if (listeDesCouleurs.get(id1).getColor() != listeDesCouleurs.get(id2).getColor()) {
                 identifiants.get(0).setBackgroundColor(Color.GRAY);
                 identifiants.get(1).setBackgroundColor(Color.GRAY);
-            }  else {
-                identifiants.get(0).setBackgroundColor(listeDesCouleurs.get(identifiants.get(0).getId()).getColor());
-                identifiants.get(1).setBackgroundColor(listeDesCouleurs.get(identifiants.get(0).getId()).getColor());
             }
         }
     }
