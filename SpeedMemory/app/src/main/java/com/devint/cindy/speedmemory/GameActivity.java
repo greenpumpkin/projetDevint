@@ -24,10 +24,12 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class GameActivity extends ActionBarActivity {
 
+    private static ArrayList<Button> identifiants = new ArrayList<Button>();
     private GridLayout gridLayout;
     private static Object lock = new Object();
     private CountDownTimer countDownTimer;
@@ -35,7 +37,7 @@ public class GameActivity extends ActionBarActivity {
     private Button b1, b2, b3, b4, b5, b6;
     private HashMap<Integer, Card> listeDesCouleurs = new HashMap<>();
     private Random random = new Random();
-    private ArrayList<Integer> identifiants = new ArrayList<Integer>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,37 +163,35 @@ public class GameActivity extends ActionBarActivity {
 
             tournerCarte(v.getId());
 
-            if (identifiants.size() < 2) {
-                int id = v.getId();
-                identifiants.add(id);
-            }
-
-            if (identifiants.size() == 2) {
-                checkCartesIdentiques(identifiants.get(0),identifiants.get(1));
-                identifiants.remove(0);
-                identifiants.remove(1);
-            }
-
         }
 
         private void tournerCarte(int id) {
 
+            int color = listeDesCouleurs.get(id).getColor();
             final Button tmp = (Button) findViewById(id);
-            tmp.setBackgroundColor(listeDesCouleurs.get(id).getColor());
+            tmp.setBackgroundColor(color);
+
+            identifiants.add(tmp);
+
 
             countDownTimer = new CountDownTimer(5000,1) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    //bloquerBouton(getBoutonNonUtilise(tmp.getId()));
+                    bloquerBouton(getBoutonNonUtilise(tmp.getId()));
+
                 }
 
                 @Override
                 public void onFinish() {
-                    //tmp.setBackgroundColor(Color.GRAY);
-                    //deBloquerBouton(getBoutonNonUtilise(tmp.getId()));
+                    deBloquerBouton(getBoutonNonUtilise(tmp.getId()));
+
+                    if (identifiants.size() == 2) {
+                        checkCartesIdentiques();
+                        identifiants.clear();
+                    }
+
                 }
             }.start();
-
         }
 
         private HashMap<Integer, Card> getBoutonNonUtilise(int id) {
@@ -217,13 +217,13 @@ public class GameActivity extends ActionBarActivity {
             }
         }
 
-        private void checkCartesIdentiques(int id1, int id2) {
-            Button tmp1 = (Button) findViewById(id1);
-            Button tmp2 = (Button) findViewById(id2);
-
-            if (listeDesCouleurs.get(id1).getColor() != listeDesCouleurs.get(id2).getColor()) {
-                tmp1.setBackgroundColor(Color.GRAY);
-                tmp2.setBackgroundColor(Color.GRAY);
+        private void checkCartesIdentiques() {
+            if (listeDesCouleurs.get(identifiants.get(0).getId()).getColor() != listeDesCouleurs.get(identifiants.get(1).getId()).getColor()) {
+                identifiants.get(0).setBackgroundColor(Color.GRAY);
+                identifiants.get(1).setBackgroundColor(Color.GRAY);
+            }  else {
+                identifiants.get(0).setBackgroundColor(listeDesCouleurs.get(identifiants.get(0).getId()).getColor());
+                identifiants.get(1).setBackgroundColor(listeDesCouleurs.get(identifiants.get(0).getId()).getColor());
             }
         }
     }
