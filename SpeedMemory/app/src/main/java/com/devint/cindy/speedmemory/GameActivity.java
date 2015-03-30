@@ -1,47 +1,37 @@
 package com.devint.cindy.speedmemory;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewDebug;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class GameActivity extends ActionBarActivity {
 
     private static ArrayList<Button> identifiants = new ArrayList<Button>();
     private GridLayout gridLayout;
-    private static Object lock = new Object();
     private CountDownTimer countDownTimer;
     private int heightCarte, widthCarte;
     private Button b1, b2, b3, b4, b5, b6;
     private HashMap<Integer, Card> listeDesCouleurs = new HashMap<>();
     private Random random = new Random();
+    private MediaPlayer mPlayer;
 
 
     @Override
@@ -51,17 +41,17 @@ public class GameActivity extends ActionBarActivity {
         setContentView(R.layout.activity_game);
 
         b1 = (Button) findViewById(R.id.carte1);
-        listeDesCouleurs.put(b1.getId(), new Card(b1,b1.getId()));
+        listeDesCouleurs.put(b1.getId(), new Card(b1.getId(),R.raw.morceau1,b1));
         b2 = (Button) findViewById(R.id.carte2);
-        listeDesCouleurs.put(b2.getId(), new Card(b2,b2.getId()));
+        listeDesCouleurs.put(b2.getId(), new Card(b2.getId(),R.raw.morceau1,b2));
         b3 = (Button) findViewById(R.id.carte3);
-        listeDesCouleurs.put(b3.getId(), new Card(b3,b3.getId()));
+        listeDesCouleurs.put(b3.getId(), new Card(b3.getId(),R.raw.morceau2,b3));
         b4 = (Button) findViewById(R.id.carte4);
-        listeDesCouleurs.put(b4.getId(), new Card(b4,b4.getId()));
+        listeDesCouleurs.put(b4.getId(), new Card(b4.getId(),R.raw.morceau2,b4));
         b5 = (Button) findViewById(R.id.carte5);
-        listeDesCouleurs.put(b5.getId(), new Card(b5,b5.getId()));
+        listeDesCouleurs.put(b5.getId(), new Card(b5.getId(),R.raw.morceau3,b5));
         b6 = (Button) findViewById(R.id.carte6);
-        listeDesCouleurs.put(b6.getId(), new Card(b6,b6.getId()));
+        listeDesCouleurs.put(b6.getId(), new Card(b6.getId(),R.raw.morceau3,b6));
 
         melangeCartes(listeDesCouleurs, random);
 
@@ -138,6 +128,9 @@ public class GameActivity extends ActionBarActivity {
         Couleur bleu = new Couleur(Color.BLUE);
         Couleur rouge = new Couleur(Color.RED);
         Couleur vert = new Couleur(Color.GREEN);
+        int son1 = R.raw.morceau1;
+        int son2 = R.raw.morceau2;
+        int son3 = R.raw.morceau3;
 
         ArrayList<Couleur> listeCouleurs = new ArrayList<Couleur>();
         listeCouleurs.add(bleu);
@@ -165,7 +158,10 @@ public class GameActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
+
             tournerCarte(v.getId());
+            playSound(listeDesCouleurs.get(v.getId()).getAudioId());
+
         }
 
         private void tournerCarte(int id) {
@@ -177,7 +173,7 @@ public class GameActivity extends ActionBarActivity {
             identifiants.add(tmp);
 
 
-            countDownTimer = new CountDownTimer(5000,1) {
+            countDownTimer = new CountDownTimer(5000, 1) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     bloquerBouton(getBoutonNonUtilise(tmp.getId()));
@@ -192,7 +188,7 @@ public class GameActivity extends ActionBarActivity {
                         checkCartesIdentiques();
                         identifiants.clear();
                     }
-                    if(isGameFinished()) {
+                    if (isGameFinished()) {
                         Context context = getApplicationContext();
                         CharSequence text = "Félicitations, vous avez gagné !";
                         int duration = Toast.LENGTH_SHORT;
@@ -206,15 +202,15 @@ public class GameActivity extends ActionBarActivity {
 
         private HashMap<Integer, Card> getBoutonNonUtilise(int id) {
             HashMap<Integer, Card> ret = new HashMap<>();
-            for(Card c : listeDesCouleurs.values()) {
-                if(c.getId() != id)
+            for (Card c : listeDesCouleurs.values()) {
+                if (c.getId() != id)
                     ret.put(id, c);
             }
             return ret;
         }
 
         private boolean isGameFinished() {
-            for(Card c : listeDesCouleurs.values()) {
+            for (Card c : listeDesCouleurs.values()) {
                 int idCard = c.getId();
                 Button b = (Button) findViewById(idCard);
                 ColorDrawable couleurDuBouton = (ColorDrawable) b.getBackground();
@@ -225,17 +221,17 @@ public class GameActivity extends ActionBarActivity {
         }
 
         private void bloquerBouton(HashMap<Integer, Card> map) {
-            for(Card c : listeDesCouleurs.values()) {
+            for (Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
-                if(!c.isCardFind())
+                if (!c.isCardFind())
                     tmp.setEnabled(false);
             }
         }
 
         private void deBloquerBouton(HashMap<Integer, Card> map) {
-            for(Card c : listeDesCouleurs.values()) {
+            for (Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
-                if(!c.isCardFind())
+                if (!c.isCardFind())
                     tmp.setEnabled(true);
             }
         }
@@ -249,8 +245,7 @@ public class GameActivity extends ActionBarActivity {
                 identifiants.get(1).setBackgroundColor(Color.GRAY);
                 listeDesCouleurs.get(id1).setIsCardFind(false);
                 listeDesCouleurs.get(id2).setIsCardFind(false);
-            }
-            else {
+            } else {
                 listeDesCouleurs.get(id1).setIsCardFind(true);
                 listeDesCouleurs.get(id2).setIsCardFind(true);
                 bloquerTrouver(listeDesCouleurs.get(id1));
@@ -260,18 +255,27 @@ public class GameActivity extends ActionBarActivity {
 
         private HashMap<Integer, Card> getButtonTrouver() {
             HashMap<Integer, Card> ret = new HashMap<>();
-            for(Card c : listeDesCouleurs.values()) {
-                if(c.isCardFind() == true)
+            for (Card c : listeDesCouleurs.values()) {
+                if (c.isCardFind() == true)
                     ret.put(c.getId(), c);
             }
             return null;
         }
 
         private void bloquerTrouver(Card c) {
-            if(c.isCardFind()) {
+            if (c.isCardFind()) {
                 Button b = (Button) findViewById(c.getId());
                 b.setEnabled(false);
             }
+        }
+
+        private void playSound(int resId) {
+            if(mPlayer != null) {
+                mPlayer.stop();
+                mPlayer.release();
+            }
+            mPlayer = MediaPlayer.create(GameActivity.this, resId);
+            mPlayer.start();
         }
     }
 }
