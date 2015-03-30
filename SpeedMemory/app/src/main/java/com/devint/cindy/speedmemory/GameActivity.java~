@@ -1,17 +1,12 @@
 package com.devint.cindy.speedmemory;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,23 +15,21 @@ import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
+/**
+ * Décrit l'activité de jeu.
+ */
 public class GameActivity extends ActionBarActivity {
 
     private static ArrayList<Button> identifiants = new ArrayList<Button>();
     private GridLayout gridLayout;
-    private static Object lock = new Object();
     private CountDownTimer countDownTimer;
     private int heightCarte, widthCarte;
     private Button b1, b2, b3, b4, b5, b6;
@@ -133,6 +126,11 @@ public class GameActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Méthode mélangeant les cartes aléatoirement.
+     * @param map
+     * @param r
+     */
     private void melangeCartes(HashMap<Integer,Card> map, Random r) {
 
         Couleur bleu = new Couleur(Color.BLUE);
@@ -161,13 +159,23 @@ public class GameActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * Classe privée (écouteurs).
+     */
     private class ClickActionListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
+
             tournerCarte(v.getId());
+
         }
 
+        /**
+         * Méthode appelée dans onClick lorsqu'on clique sur un bouton.
+         * Active la couleur associée au bouton.
+         * @param id
+         */
         private void tournerCarte(int id) {
 
             int color = listeDesCouleurs.get(id).getColor();
@@ -194,16 +202,22 @@ public class GameActivity extends ActionBarActivity {
                     }
                     if(isGameFinished()) {
                         Context context = getApplicationContext();
-                        CharSequence text = "Félicitations, vous avez gagné !";
+                        CharSequence text = "Félicitation vous avez gagner!";
                         int duration = Toast.LENGTH_SHORT;
 
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
                     }
+
                 }
             }.start();
         }
 
+        /**
+         * Permet d'identifier les boutons sur lesquels on a pas cliqués (utile dans le countDownTimer)
+         * @param id
+         * @return
+         */
         private HashMap<Integer, Card> getBoutonNonUtilise(int id) {
             HashMap<Integer, Card> ret = new HashMap<>();
             for(Card c : listeDesCouleurs.values()) {
@@ -213,6 +227,12 @@ public class GameActivity extends ActionBarActivity {
             return ret;
         }
 
+<<<<<<< HEAD
+        /**
+         * Méthode empêchant de cliquer sur un bouton pendant qu'un autre est en marche
+         * @param map
+         */
+=======
         private boolean isGameFinished() {
             for(Card c : listeDesCouleurs.values()) {
                 int idCard = c.getId();
@@ -224,22 +244,28 @@ public class GameActivity extends ActionBarActivity {
             return true;
         }
 
+>>>>>>> 7e6ce2f2b6acfcc8300a60b1abb64753c535a3e7
         private void bloquerBouton(HashMap<Integer, Card> map) {
             for(Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
-                if(!c.isCardFind())
-                    tmp.setEnabled(false);
+                tmp.setEnabled(false);
             }
         }
 
+        /**
+         * Méthode permettant de débloquer un bouton
+         * @param map
+         */
         private void deBloquerBouton(HashMap<Integer, Card> map) {
             for(Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
-                if(!c.isCardFind())
-                    tmp.setEnabled(true);
+                tmp.setEnabled(true);
             }
         }
 
+        /**
+         * Méthode comparant deux boutons.
+         */
         private void checkCartesIdentiques() {
 
             int id1 = identifiants.get(0).getId();
@@ -247,30 +273,6 @@ public class GameActivity extends ActionBarActivity {
             if (listeDesCouleurs.get(id1).getColor() != listeDesCouleurs.get(id2).getColor()) {
                 identifiants.get(0).setBackgroundColor(Color.GRAY);
                 identifiants.get(1).setBackgroundColor(Color.GRAY);
-                listeDesCouleurs.get(id1).setIsCardFind(false);
-                listeDesCouleurs.get(id2).setIsCardFind(false);
-            }
-            else {
-                listeDesCouleurs.get(id1).setIsCardFind(true);
-                listeDesCouleurs.get(id2).setIsCardFind(true);
-                bloquerTrouver(listeDesCouleurs.get(id1));
-                bloquerTrouver(listeDesCouleurs.get(id2));
-            }
-        }
-
-        private HashMap<Integer, Card> getButtonTrouver() {
-            HashMap<Integer, Card> ret = new HashMap<>();
-            for(Card c : listeDesCouleurs.values()) {
-                if(c.isCardFind() == true)
-                    ret.put(c.getId(), c);
-            }
-            return null;
-        }
-
-        private void bloquerTrouver(Card c) {
-            if(c.isCardFind()) {
-                Button b = (Button) findViewById(c.getId());
-                b.setEnabled(false);
             }
         }
     }
