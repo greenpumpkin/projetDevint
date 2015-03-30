@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        final Button buttonHelp = (android.widget.Button) findViewById(R.id.regle);
+        final Button buttonHelp = (android.widget.Button) findViewById(R.id.modesDeJeu);
         buttonHelp.setOnClickListener(new View.OnClickListener() {
 
             @Override
