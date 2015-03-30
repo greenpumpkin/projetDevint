@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
-/**
- * Décrit l'activité principale.
- */
+
 public class MainActivity extends ActionBarActivity {
 
     private int result;

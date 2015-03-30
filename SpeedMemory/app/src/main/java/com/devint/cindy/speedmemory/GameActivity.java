@@ -1,12 +1,17 @@
 package com.devint.cindy.speedmemory;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,21 +20,23 @@ import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
-/**
- * Décrit l'activité de jeu.
- */
 public class GameActivity extends ActionBarActivity {
 
     private static ArrayList<Button> identifiants = new ArrayList<Button>();
     private GridLayout gridLayout;
+    private static Object lock = new Object();
     private CountDownTimer countDownTimer;
     private int heightCarte, widthCarte;
     private Button b1, b2, b3, b4, b5, b6;
@@ -126,11 +133,6 @@ public class GameActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Méthode mélangeant les cartes aléatoirement.
-     * @param map
-     * @param r
-     */
     private void melangeCartes(HashMap<Integer,Card> map, Random r) {
 
         Couleur bleu = new Couleur(Color.BLUE);
@@ -159,9 +161,6 @@ public class GameActivity extends ActionBarActivity {
         }
     }
 
-    /**
-     * Classe privée (écouteurs).
-     */
     private class ClickActionListener implements View.OnClickListener {
 
         @Override
@@ -171,11 +170,6 @@ public class GameActivity extends ActionBarActivity {
 
         }
 
-        /**
-         * Méthode appelée dans onClick lorsqu'on clique sur un bouton.
-         * Active la couleur associée au bouton.
-         * @param id
-         */
         private void tournerCarte(int id) {
 
             int color = listeDesCouleurs.get(id).getColor();
@@ -213,11 +207,6 @@ public class GameActivity extends ActionBarActivity {
             }.start();
         }
 
-        /**
-         * Permet d'identifier les boutons sur lesquels on a pas cliqués (utile dans le countDownTimer)
-         * @param id
-         * @return
-         */
         private HashMap<Integer, Card> getBoutonNonUtilise(int id) {
             HashMap<Integer, Card> ret = new HashMap<>();
             for(Card c : listeDesCouleurs.values()) {
@@ -227,11 +216,6 @@ public class GameActivity extends ActionBarActivity {
             return ret;
         }
 
-
-        /**
-         * Méthode empêchant de cliquer sur un bouton pendant qu'un autre est en marche
-         * @param map
-         */
         private boolean isGameFinished() {
             for(Card c : listeDesCouleurs.values()) {
                 int idCard = c.getId();
@@ -250,10 +234,6 @@ public class GameActivity extends ActionBarActivity {
             }
         }
 
-        /**
-         * Méthode permettant de débloquer un bouton
-         * @param map
-         */
         private void deBloquerBouton(HashMap<Integer, Card> map) {
             for(Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
@@ -261,9 +241,6 @@ public class GameActivity extends ActionBarActivity {
             }
         }
 
-        /**
-         * Méthode comparant deux boutons.
-         */
         private void checkCartesIdentiques() {
 
             int id1 = identifiants.get(0).getId();
