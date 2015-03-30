@@ -17,24 +17,10 @@ public class Card {
     private boolean isFind = false;
 
 
-    public Card(Button button, int id, int color) {
-        this.button=button;
-        this.color = color;
+    public Card(int id, int audio, Button button) {
         this.id = id;
-        this.isFind = false;
-    }
-
-    public Card(Button button, int id, int color, int audioId) {
-        this.button=button;
-        this.color = color;
-        this.id = id;
-        this.audioId = audioId;
-        this.isFind = false;
-    }
-
-    public Card(Button button, int id) {
-        this.button=button;
-        this.id = id;
+        this.audioId = audio;
+        this.button = button;
         this.isFind = false;
     }
 
@@ -59,4 +45,9 @@ public class Card {
     public boolean isCardFind() { return this.isFind; }
 
     public void setIsCardFind(boolean bool) { this.isFind = bool; }
+
+    public void setColorAndAudio(int color, int audio) {
+        this.color = color;
+        this.audioId = audio;
+    }
 }

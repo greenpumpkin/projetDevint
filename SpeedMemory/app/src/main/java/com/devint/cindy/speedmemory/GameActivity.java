@@ -132,6 +132,11 @@ public class GameActivity extends ActionBarActivity {
         int son2 = R.raw.morceau2;
         int son3 = R.raw.morceau3;
 
+        HashMap<Couleur, Integer> listeCouleurEtSonAssocie = new HashMap<>();
+        listeCouleurEtSonAssocie.put(bleu, son1);
+        listeCouleurEtSonAssocie.put(rouge, son2);
+        listeCouleurEtSonAssocie.put(vert, son3);
+
         ArrayList<Couleur> listeCouleurs = new ArrayList<Couleur>();
         listeCouleurs.add(bleu);
         listeCouleurs.add(rouge);
@@ -139,9 +144,9 @@ public class GameActivity extends ActionBarActivity {
 
         for (Card carte : map.values()) {
 
-
             int indiceRandom = r.nextInt(listeCouleurs.size());
             Couleur c = listeCouleurs.get(indiceRandom);
+            int idAudio = listeCouleurEtSonAssocie.get(c);
             int reste = c.getReste();
             c.setReste(--reste);
 
@@ -149,7 +154,7 @@ public class GameActivity extends ActionBarActivity {
                 listeCouleurs.remove(indiceRandom);
             }
 
-            carte.setColor(c.getColor());
+            carte.setColorAndAudio(c.getColor(), idAudio);
 
         }
     }
@@ -176,13 +181,13 @@ public class GameActivity extends ActionBarActivity {
             countDownTimer = new CountDownTimer(5000, 1) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    bloquerBouton(getBoutonNonUtilise(tmp.getId()));
+                    bloquerBouton();
 
                 }
 
                 @Override
                 public void onFinish() {
-                    deBloquerBouton(getBoutonNonUtilise(tmp.getId()));
+                    deBloquerBouton();
 
                     if (identifiants.size() == 2) {
                         checkCartesIdentiques();
@@ -220,7 +225,7 @@ public class GameActivity extends ActionBarActivity {
             return true;
         }
 
-        private void bloquerBouton(HashMap<Integer, Card> map) {
+        private void bloquerBouton() {
             for (Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
                 if (!c.isCardFind())
@@ -228,7 +233,7 @@ public class GameActivity extends ActionBarActivity {
             }
         }
 
-        private void deBloquerBouton(HashMap<Integer, Card> map) {
+        private void deBloquerBouton() {
             for (Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
                 if (!c.isCardFind())
