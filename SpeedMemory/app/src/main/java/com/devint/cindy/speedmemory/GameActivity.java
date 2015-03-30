@@ -2,6 +2,8 @@ package com.devint.cindy.speedmemory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,8 +11,14 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewDebug;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -192,6 +200,14 @@ public class GameActivity extends ActionBarActivity {
                         checkCartesIdentiques();
                         identifiants.clear();
                     }
+                    if(isGameFinished()) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "Félicitation vous avez gagner!";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
 
                 }
             }.start();
@@ -211,10 +227,22 @@ public class GameActivity extends ActionBarActivity {
             return ret;
         }
 
+
         /**
          * Méthode empêchant de cliquer sur un bouton pendant qu'un autre est en marche
          * @param map
          */
+        private boolean isGameFinished() {
+            for(Card c : listeDesCouleurs.values()) {
+                int idCard = c.getId();
+                Button b = (Button) findViewById(idCard);
+                ColorDrawable couleurDuBouton = (ColorDrawable) b.getBackground();
+                int colorId = couleurDuBouton.getColor();
+                if (colorId == Color.GRAY) return false;
+            }
+            return true;
+        }
+
         private void bloquerBouton(HashMap<Integer, Card> map) {
             for(Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
