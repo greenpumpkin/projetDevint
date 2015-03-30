@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
@@ -32,6 +33,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static android.media.MediaPlayer.create;
+
 public class GameActivity extends ActionBarActivity {
 
     private static ArrayList<Button> identifiants = new ArrayList<Button>();
@@ -43,25 +46,18 @@ public class GameActivity extends ActionBarActivity {
     private HashMap<Integer, Card> listeDesCouleurs = new HashMap<>();
     private Random random = new Random();
 
+    private Song songs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        b1 = (Button) findViewById(R.id.carte1);
-        listeDesCouleurs.put(b1.getId(), new Card(b1,b1.getId()));
-        b2 = (Button) findViewById(R.id.carte2);
-        listeDesCouleurs.put(b2.getId(), new Card(b2,b2.getId()));
-        b3 = (Button) findViewById(R.id.carte3);
-        listeDesCouleurs.put(b3.getId(), new Card(b3,b3.getId()));
-        b4 = (Button) findViewById(R.id.carte4);
-        listeDesCouleurs.put(b4.getId(), new Card(b4,b4.getId()));
-        b5 = (Button) findViewById(R.id.carte5);
-        listeDesCouleurs.put(b5.getId(), new Card(b5,b5.getId()));
-        b6 = (Button) findViewById(R.id.carte6);
-        listeDesCouleurs.put(b6.getId(), new Card(b6,b6.getId()));
+        //initilization des piste audio
+        songs = new Song();
+        //intilization des buttons
+        setButtons();
 
         melangeCartes(listeDesCouleurs, random);
 
@@ -161,12 +157,38 @@ public class GameActivity extends ActionBarActivity {
         }
     }
 
+    private void setButtons(){
+        b1 = (Button) findViewById(R.id.carte1);
+        listeDesCouleurs.put(b1.getId(), new Card(b1.getId(),songs.getNextRandomSong(),b1));
+        b2 = (Button) findViewById(R.id.carte2);
+        listeDesCouleurs.put(b2.getId(), new Card(b2.getId(),songs.getNextRandomSong(),b2));
+        b3 = (Button) findViewById(R.id.carte3);
+        listeDesCouleurs.put(b3.getId(), new Card(b3.getId(),songs.getNextRandomSong(),b3));
+        b4 = (Button) findViewById(R.id.carte4);
+        listeDesCouleurs.put(b4.getId(), new Card(b4.getId(),songs.getNextRandomSong(),b4));
+        b5 = (Button) findViewById(R.id.carte5);
+        listeDesCouleurs.put(b5.getId(), new Card(b5.getId(),songs.getNextRandomSong(),b5));
+        b6 = (Button) findViewById(R.id.carte6);
+        listeDesCouleurs.put(b6.getId(), new Card(b6.getId(),songs.getNextRandomSong(),b6));
+    }
+
     private class ClickActionListener implements View.OnClickListener {
 
+
+        MediaPlayer mediaPlayer;
         @Override
         public void onClick(View v) {
 
             tournerCarte(v.getId());
+            jouerSon(v.getId());
+
+        }
+
+        private void jouerSon(int id){
+            Button tmp = (Button) findViewById(id);
+            Card card = listeDesCouleurs.get(tmp);
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), card.getAudioId());
+            mediaPlayer.start();
 
         }
 
@@ -229,14 +251,14 @@ public class GameActivity extends ActionBarActivity {
 
         private void bloquerBouton(HashMap<Integer, Card> map) {
             for(Card c : listeDesCouleurs.values()) {
-                Button tmp = (Button) findViewById(c.getId());
+                Button tmp = (Button) findViewById(c.getAudioId());
                 tmp.setEnabled(false);
             }
         }
 
         private void deBloquerBouton(HashMap<Integer, Card> map) {
             for(Card c : listeDesCouleurs.values()) {
-                Button tmp = (Button) findViewById(c.getId());
+                Button tmp = (Button) findViewById(c.getAudioId());
                 tmp.setEnabled(true);
             }
         }

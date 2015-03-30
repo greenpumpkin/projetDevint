@@ -33,6 +33,11 @@ public class Card {
         this.button=button;
         this.id = id;
     }
+    public Card( int id,int audioId,Button button) {
+        this.button=button;
+        this.id = id;
+        this.audioId = audioId;
+    }
 
     public int getColor() {
         return this.color;

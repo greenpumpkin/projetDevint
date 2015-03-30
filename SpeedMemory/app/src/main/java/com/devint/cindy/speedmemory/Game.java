@@ -19,20 +19,8 @@ public class Game {
         cards = new ArrayList<Card>();
     }
     public void playSound(Card card, Context context){
-        /*Uri myUri = Uri.parse("../../../../../res/raw" + card.getAudioName()); // initialize Uri here
 
-        MediaPlayer mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        try {
-            mediaPlayer.setDataSource(context, myUri);
-            mediaPlayer.prepare();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        mediaPlayer.start();*/
-        MediaPlayer mediaPlayer = MediaPlayer.create(context, card.getId());
-        mediaPlayer.start();
+
 
 
     }
