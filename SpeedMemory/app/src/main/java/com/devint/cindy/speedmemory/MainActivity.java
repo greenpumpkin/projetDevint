@@ -11,7 +11,9 @@ import android.widget.Button;
 
 import java.util.Locale;
 
-
+/**
+ * Décrit l'activité principale.
+ */
 public class MainActivity extends ActionBarActivity {
 
     private TextToSpeech textToSpeech;
