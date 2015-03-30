@@ -165,9 +165,7 @@ public class GameActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
-
             tournerCarte(v.getId());
-
         }
 
         private void tournerCarte(int id) {
@@ -202,7 +200,6 @@ public class GameActivity extends ActionBarActivity {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
                     }
-
                 }
             }.start();
         }
@@ -230,14 +227,16 @@ public class GameActivity extends ActionBarActivity {
         private void bloquerBouton(HashMap<Integer, Card> map) {
             for(Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
-                tmp.setEnabled(false);
+                if(!c.isCardFind())
+                    tmp.setEnabled(false);
             }
         }
 
         private void deBloquerBouton(HashMap<Integer, Card> map) {
             for(Card c : listeDesCouleurs.values()) {
                 Button tmp = (Button) findViewById(c.getId());
-                tmp.setEnabled(true);
+                if(!c.isCardFind())
+                    tmp.setEnabled(true);
             }
         }
 
@@ -248,6 +247,30 @@ public class GameActivity extends ActionBarActivity {
             if (listeDesCouleurs.get(id1).getColor() != listeDesCouleurs.get(id2).getColor()) {
                 identifiants.get(0).setBackgroundColor(Color.GRAY);
                 identifiants.get(1).setBackgroundColor(Color.GRAY);
+                listeDesCouleurs.get(id1).setIsCardFind(false);
+                listeDesCouleurs.get(id2).setIsCardFind(false);
+            }
+            else {
+                listeDesCouleurs.get(id1).setIsCardFind(true);
+                listeDesCouleurs.get(id2).setIsCardFind(true);
+                bloquerTrouver(listeDesCouleurs.get(id1));
+                bloquerTrouver(listeDesCouleurs.get(id2));
+            }
+        }
+
+        private HashMap<Integer, Card> getButtonTrouver() {
+            HashMap<Integer, Card> ret = new HashMap<>();
+            for(Card c : listeDesCouleurs.values()) {
+                if(c.isCardFind() == true)
+                    ret.put(c.getId(), c);
+            }
+            return null;
+        }
+
+        private void bloquerTrouver(Card c) {
+            if(c.isCardFind()) {
+                Button b = (Button) findViewById(c.getId());
+                b.setEnabled(false);
             }
         }
     }

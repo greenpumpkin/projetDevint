@@ -14,12 +14,14 @@ public class Card {
     private int color;
     private int id;
     private boolean isColored = false;
+    private boolean isFind = false;
 
 
     public Card(Button button, int id, int color) {
         this.button=button;
         this.color = color;
         this.id = id;
+        this.isFind = false;
     }
 
     public Card(Button button, int id, int color, int audioId) {
@@ -27,11 +29,13 @@ public class Card {
         this.color = color;
         this.id = id;
         this.audioId = audioId;
+        this.isFind = false;
     }
 
     public Card(Button button, int id) {
         this.button=button;
         this.id = id;
+        this.isFind = false;
     }
 
     public int getColor() {
@@ -51,4 +55,8 @@ public class Card {
     public void setColored(boolean isColored) { this.isColored = isColored; }
 
     public boolean isColored() { return isColored; }
+
+    public boolean isCardFind() { return this.isFind; }
+
+    public void setIsCardFind(boolean bool) { this.isFind = bool; }
 }
