@@ -8,6 +8,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -32,6 +33,7 @@ public class GameActivity extends ActionBarActivity {
     private HashMap<Integer, Card> listeDesCouleurs = new HashMap<>();
     private Random random = new Random();
     private MediaPlayer mPlayer;
+    private int score;
 
 
     @Override
@@ -39,7 +41,7 @@ public class GameActivity extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+        score = 0;
         b1 = (Button) findViewById(R.id.carte1);
         listeDesCouleurs.put(b1.getId(), new Card(b1.getId(),R.raw.morceau1,b1));
         b2 = (Button) findViewById(R.id.carte2);
@@ -163,7 +165,7 @@ public class GameActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
-
+            score = score + 1;
             tournerCarte(v.getId());
             playSound(listeDesCouleurs.get(v.getId()).getAudioId());
 
@@ -195,7 +197,7 @@ public class GameActivity extends ActionBarActivity {
                     }
                     if (isGameFinished()) {
                         Context context = getApplicationContext();
-                        CharSequence text = "Félicitations, vous avez gagné !";
+                        CharSequence text = "Félicitations, vous avez gagné !\n en "+ score+ " clic";
                         int duration = Toast.LENGTH_SHORT;
 
                         Toast toast = Toast.makeText(context, text, duration);

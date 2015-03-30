@@ -12,10 +12,11 @@
         android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/commencer"
-        android:layout_above="@+id/modesDeJeu"
+        android:layout_above="@+id/regle"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
+   <!-- <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OPTIONS"
@@ -32,6 +33,15 @@
         android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/modesDeJeu"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />-->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Règles DU JEU"
+        android:textSize="40dp"
+        android:id="@+id/regle"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 

@@ -7,9 +7,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class HelpActivity extends ActionBarActivity {
+
+
+    private String textModeDeJeu = "Le jeu propose une grille composée de plusieurs cartes. " +
+            "Chaque carte est associée à un morceau de musique qui est dévoilé lorsque vous cliquez dessus. " +
+            "Chaque morceau de musique a son double, quelque part caché dans la grille. " +
+            "Le but du jeu est de retrouver les bonnes paires musicales " +
+            "parmi toutes les cartes retournées en un temps record !";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +33,9 @@ public class HelpActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        final TextView textViewModeDeJeu = (TextView) findViewById(R.id.modeDeJeu);
+        textViewModeDeJeu.setText(textModeDeJeu);
     }
 
 
