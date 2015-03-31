@@ -197,7 +197,7 @@ public class GameActivity extends ActionBarActivity {
                     }
                     if (isGameFinished()) {
                         Context context = getApplicationContext();
-                        CharSequence text = "Félicitations, vous avez gagné !\n en "+ score+ " clic";
+                        CharSequence text = "Félicitations, vous avez gagné !\n en "+ score+ " clics";
                         int duration = Toast.LENGTH_SHORT;
 
                         Toast toast = Toast.makeText(context, text, duration);
