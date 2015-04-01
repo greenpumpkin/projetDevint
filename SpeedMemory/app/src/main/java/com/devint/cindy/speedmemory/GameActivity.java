@@ -152,7 +152,7 @@ public class GameActivity extends ActionBarActivity {
                 return;
             }
             timeLast = SystemClock.elapsedRealtime();
-            
+
             tournerCarte(v.getId());
             playSound(listeDesCouleurs.get(v.getId()).getAudioId());
 
