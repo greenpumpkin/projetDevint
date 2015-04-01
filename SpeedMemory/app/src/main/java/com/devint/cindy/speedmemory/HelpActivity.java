@@ -30,7 +30,6 @@ public class HelpActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HelpActivity.this, MainActivity.class);
-                MainActivity.textToSpeech.stop();
                 startActivity(intent);
             }
         });

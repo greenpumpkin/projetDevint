@@ -16,7 +16,7 @@ import java.util.Locale;
 public class MainActivity extends ActionBarActivity {
 
     private int result;
-    public static TextToSpeech textToSpeech;
+    private TextToSpeech textToSpeech;
 
     private final String textModeDeJeu = "Le jeu propose une grille composée de plusieurs cartes. " +
             "Chaque carte est associée à un morceau de musique qui est dévoilé lorsque vous cliquez dessus. " +
