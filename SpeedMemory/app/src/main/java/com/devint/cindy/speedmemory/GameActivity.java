@@ -8,6 +8,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class GameActivity extends ActionBarActivity {
     private Random random = new Random();
     private MediaPlayer mPlayer;
     private int score;
+    private long timeLast = 0;
 
 
     @Override
@@ -145,7 +147,12 @@ public class GameActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
-            score = score + 1;
+            score++;
+            if (SystemClock.elapsedRealtime() - timeLast < 1000) {
+                return;
+            }
+            timeLast = SystemClock.elapsedRealtime();
+            
             tournerCarte(v.getId());
             playSound(listeDesCouleurs.get(v.getId()).getAudioId());
 
@@ -163,13 +170,13 @@ public class GameActivity extends ActionBarActivity {
             countDownTimer = new CountDownTimer(5000, 1) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    bloquerBouton();
+                    //bloquerBouton();
 
                 }
 
                 @Override
                 public void onFinish() {
-                    deBloquerBouton();
+                    //deBloquerBouton();
 
                     if (identifiants.size() == 2) {
                         checkCartesIdentiques();
