@@ -8,6 +8,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class GameActivity extends ActionBarActivity {
@@ -34,6 +36,7 @@ public class GameActivity extends ActionBarActivity {
     private Random random = new Random();
     private MediaPlayer mPlayer;
     private int score;
+    private long timeLast = 0;
 
 
     @Override
@@ -42,18 +45,20 @@ public class GameActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         score = 0;
+        Typeface font = Typeface.createFromAsset(getAssets(), "Megalopolis.ttf");
+
         b1 = (Button) findViewById(R.id.carte1);
-        listeDesCouleurs.put(b1.getId(), new Card(b1.getId(),R.raw.morceau1,b1));
+        listeDesCouleurs.put(b1.getId(), new Card(b1.getId(), R.raw.morceau1, b1));
         b2 = (Button) findViewById(R.id.carte2);
-        listeDesCouleurs.put(b2.getId(), new Card(b2.getId(),R.raw.morceau1,b2));
+        listeDesCouleurs.put(b2.getId(), new Card(b2.getId(), R.raw.morceau1, b2));
         b3 = (Button) findViewById(R.id.carte3);
-        listeDesCouleurs.put(b3.getId(), new Card(b3.getId(),R.raw.morceau2,b3));
+        listeDesCouleurs.put(b3.getId(), new Card(b3.getId(), R.raw.morceau2, b3));
         b4 = (Button) findViewById(R.id.carte4);
-        listeDesCouleurs.put(b4.getId(), new Card(b4.getId(),R.raw.morceau2,b4));
+        listeDesCouleurs.put(b4.getId(), new Card(b4.getId(), R.raw.morceau2, b4));
         b5 = (Button) findViewById(R.id.carte5);
-        listeDesCouleurs.put(b5.getId(), new Card(b5.getId(),R.raw.morceau3,b5));
+        listeDesCouleurs.put(b5.getId(), new Card(b5.getId(), R.raw.morceau3, b5));
         b6 = (Button) findViewById(R.id.carte6);
-        listeDesCouleurs.put(b6.getId(), new Card(b6.getId(),R.raw.morceau3,b6));
+        listeDesCouleurs.put(b6.getId(), new Card(b6.getId(), R.raw.morceau3, b6));
 
         melangeCartes(listeDesCouleurs, random);
 
@@ -67,41 +72,18 @@ public class GameActivity extends ActionBarActivity {
         widthCarte = width / 6;
         heightCarte = height / 4;
 
-        b1.setWidth(widthCarte);
-        b1.setHeight(heightCarte);
-        b2.setWidth(widthCarte);
-        b2.setHeight(heightCarte);
-        b3.setWidth(widthCarte);
-        b3.setHeight(heightCarte);
-        b4.setWidth(widthCarte);
-        b4.setHeight(heightCarte);
-        b5.setWidth(widthCarte);
-        b5.setHeight(heightCarte);
-        b6.setWidth(widthCarte);
-        b6.setHeight(heightCarte);
+        for (Map.Entry<Integer, Card> entry : listeDesCouleurs.entrySet()) {
+            int cle = entry.getKey();
+            Card value = entry.getValue();
 
-        b1.setBackgroundColor(Color.GRAY);
-        b2.setBackgroundColor(Color.GRAY);
-        b3.setBackgroundColor(Color.GRAY);
-        b4.setBackgroundColor(Color.GRAY);
-        b5.setBackgroundColor(Color.GRAY);
-        b6.setBackgroundColor(Color.GRAY);
-
-        Typeface font = Typeface.createFromAsset(getAssets(),"Megalopolis.ttf");
-        b1.setTypeface(font);
-        b2.setTypeface(font);
-        b3.setTypeface(font);
-        b4.setTypeface(font);
-        b5.setTypeface(font);
-        b6.setTypeface(font);
-
-        b1.setOnClickListener(new ClickActionListener());
-        b2.setOnClickListener(new ClickActionListener());
-        b3.setOnClickListener(new ClickActionListener());
-        b4.setOnClickListener(new ClickActionListener());
-        b5.setOnClickListener(new ClickActionListener());
-        b6.setOnClickListener(new ClickActionListener());
-
+            for (int i = 0; i < listeDesCouleurs.size(); i++) {
+                value.getButton().setWidth(widthCarte);
+                value.getButton().setHeight(heightCarte);
+                value.getButton().setBackgroundColor(Color.GRAY);
+                value.getButton().setTypeface(font);
+                value.getButton().setOnClickListener(new ClickActionListener());
+            }
+        }
 
     }
 
@@ -171,7 +153,12 @@ public class GameActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
-            score = score + 1;
+            score++;
+            if (SystemClock.elapsedRealtime() - timeLast < 1000) {
+                return;
+            }
+            timeLast = SystemClock.elapsedRealtime();
+
             tournerCarte(v.getId());
             playSound(listeDesCouleurs.get(v.getId()).getAudioId());
 
@@ -189,13 +176,13 @@ public class GameActivity extends ActionBarActivity {
             countDownTimer = new CountDownTimer(5000, 1) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    bloquerBouton();
+                    //bloquerBouton();
 
                 }
 
                 @Override
                 public void onFinish() {
-                    deBloquerBouton();
+                    //deBloquerBouton();
 
                     if (identifiants.size() == 2) {
                         checkCartesIdentiques();
@@ -203,7 +190,7 @@ public class GameActivity extends ActionBarActivity {
                     }
                     if (isGameFinished()) {
                         Context context = getApplicationContext();
-                        CharSequence text = "Félicitations, vous avez gagné !\n en "+ score+ " clic";
+                        CharSequence text = "Félicitations, vous avez gagné \n en "+ score+ " clics !";
                         int duration = Toast.LENGTH_SHORT;
 
                         Toast toast = Toast.makeText(context, text, duration);
