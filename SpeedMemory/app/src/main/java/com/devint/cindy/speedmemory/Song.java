@@ -29,9 +29,9 @@ public class Song {
      */
     public void setListeAudio(){
 
-        ///listeAudio.add();
-        //listeAudio.add();
-        //listeAudio.add();
+        listeAudio.add(R.raw.morceau1);
+        listeAudio.add(R.raw.morceau2);
+        listeAudio.add(R.raw.morceau3);
         tmpAudio=listeAudio;
     }
 
