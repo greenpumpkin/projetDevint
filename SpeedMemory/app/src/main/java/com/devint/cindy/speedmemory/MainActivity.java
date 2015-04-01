@@ -18,6 +18,12 @@ public class MainActivity extends ActionBarActivity {
     private int result;
     private TextToSpeech textToSpeech;
 
+    private final String textModeDeJeu = "Le jeu propose une grille composée de plusieurs cartes. " +
+            "Chaque carte est associée à un morceau de musique qui est dévoilé lorsque vous cliquez dessus. " +
+            "Chaque morceau de musique a son double, quelque part caché dans la grille. " +
+            "Le but du jeu est de retrouver les bonnes paires musicales " +
+            "parmi toutes les cartes retournées en un temps record !";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        final Button buttonHelp = (android.widget.Button) findViewById(R.id.options);
+        final Button buttonHelp = (android.widget.Button) findViewById(R.id.modesDeJeu);
         buttonHelp.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -62,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
                     Toast.makeText(getApplicationContext(), "Votre appareil ne supporte pas cette version", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    textToSpeech.speak("Options du jeu", TextToSpeech.QUEUE_FLUSH, null);
+                    textToSpeech.speak(textModeDeJeu, TextToSpeech.QUEUE_FLUSH, null);
                 }
                 Intent intent = new Intent(MainActivity.this, HelpActivity.class);
                 startActivity(intent);

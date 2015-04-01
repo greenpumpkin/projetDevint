@@ -12,7 +12,6 @@
         android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/commencer"
-        android:layout_above="@+id/modesDeJeu"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -22,7 +21,7 @@
         android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/options"
-        android:layout_below="@+id/modesDeJeu"
+        android:layout_below="@+id/commencer"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -32,7 +31,7 @@
         android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/modesDeJeu"
-        android:layout_centerVertical="true"
+        android:layout_below="@id/options"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

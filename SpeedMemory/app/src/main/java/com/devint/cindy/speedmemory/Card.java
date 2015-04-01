@@ -23,11 +23,7 @@ public class Card {
         this.button = button;
         this.isFind = false;
     }
-    public Card( int id,int audioId,Button button) {
-        this.button=button;
-        this.id = id;
-        this.audioId = audioId;
-    }
+
 
     public int getColor() {
         return this.color;
@@ -54,5 +50,9 @@ public class Card {
     public void setColorAndAudio(int color, int audio) {
         this.color = color;
         this.audioId = audio;
+    }
+
+    public Button getButton() {
+        return button;
     }
 }
