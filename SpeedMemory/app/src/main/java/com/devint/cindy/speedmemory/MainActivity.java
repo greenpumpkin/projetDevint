@@ -36,9 +36,6 @@ public class MainActivity extends ActionBarActivity {
         });
 
         textToSpeech.setLanguage(Locale.FRANCE);
-        String bienvenue = "Bienvenue dans speed memory";
-        textToSpeech.stop();
-        textToSpeech.speak(bienvenue, TextToSpeech.QUEUE_FLUSH, null);
 
         final Button buttonSuiv = (android.widget.Button) findViewById(R.id.commencer);
         buttonSuiv.setOnClickListener(new View.OnClickListener() {
