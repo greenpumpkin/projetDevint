@@ -24,6 +24,7 @@ public class Card {
         this.isFind = false;
     }
 
+
     public int getColor() {
         return this.color;
     }
@@ -55,7 +56,9 @@ public class Card {
         return button;
     }
 
+
     public void setButton(Button button) {
         this.button = button;
     }
+
 }
