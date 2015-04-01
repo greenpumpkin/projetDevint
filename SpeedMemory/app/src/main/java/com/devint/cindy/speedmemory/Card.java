@@ -50,4 +50,12 @@ public class Card {
         this.color = color;
         this.audioId = audio;
     }
+
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
 }
