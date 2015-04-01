@@ -31,6 +31,7 @@ public class HelpActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HelpActivity.this, MainActivity.class);
                 startActivity(intent);
+                MainActivity.textToSpeech.stop();
             }
         });
 
