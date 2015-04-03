@@ -30,6 +30,7 @@
         android:gravity="center"
         android:id="@+id/modeDeJeu"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp" />
 
 </RelativeLayout>

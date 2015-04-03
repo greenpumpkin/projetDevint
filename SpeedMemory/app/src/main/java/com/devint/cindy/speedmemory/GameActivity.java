@@ -32,11 +32,12 @@ public class GameActivity extends ActionBarActivity {
     private CountDownTimer countDownTimer;
     private int heightCarte, widthCarte;
     private Button b1, b2, b3, b4, b5, b6;
-    private HashMap<Integer, Card> listeDesCouleurs = new HashMap<>();
+    private HashMap<Integer, Card> listeDesImages = new HashMap<>();
     private Random random = new Random();
     private MediaPlayer mPlayer;
     private int score;
     private long timeLast = 0;
+    private int cartesRetournees;
 
 
     @Override
@@ -48,19 +49,21 @@ public class GameActivity extends ActionBarActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), "Megalopolis.ttf");
 
         b1 = (Button) findViewById(R.id.carte1);
-        listeDesCouleurs.put(b1.getId(), new Card(b1.getId(), R.raw.morceau1, b1));
+        listeDesImages.put(b1.getId(), new Card(b1.getId(), R.raw.morceau1, b1));
         b2 = (Button) findViewById(R.id.carte2);
-        listeDesCouleurs.put(b2.getId(), new Card(b2.getId(), R.raw.morceau1, b2));
+        listeDesImages.put(b2.getId(), new Card(b2.getId(), R.raw.morceau1, b2));
         b3 = (Button) findViewById(R.id.carte3);
-        listeDesCouleurs.put(b3.getId(), new Card(b3.getId(), R.raw.morceau2, b3));
+        listeDesImages.put(b3.getId(), new Card(b3.getId(), R.raw.morceau2, b3));
         b4 = (Button) findViewById(R.id.carte4);
-        listeDesCouleurs.put(b4.getId(), new Card(b4.getId(), R.raw.morceau2, b4));
+        listeDesImages.put(b4.getId(), new Card(b4.getId(), R.raw.morceau2, b4));
         b5 = (Button) findViewById(R.id.carte5);
-        listeDesCouleurs.put(b5.getId(), new Card(b5.getId(), R.raw.morceau3, b5));
+        listeDesImages.put(b5.getId(), new Card(b5.getId(), R.raw.morceau3, b5));
         b6 = (Button) findViewById(R.id.carte6);
-        listeDesCouleurs.put(b6.getId(), new Card(b6.getId(), R.raw.morceau3, b6));
+        listeDesImages.put(b6.getId(), new Card(b6.getId(), R.raw.morceau3, b6));
 
-        melangeCartes(listeDesCouleurs, random);
+        cartesRetournees = listeDesImages.size();
+
+        melangeCartes(listeDesImages, random);
 
         gridLayout = (GridLayout) findViewById(R.id.gridLayout);
         Display display = getWindowManager().getDefaultDisplay();
@@ -72,14 +75,14 @@ public class GameActivity extends ActionBarActivity {
         widthCarte = width / 6;
         heightCarte = height / 4;
 
-        for (Map.Entry<Integer, Card> entry : listeDesCouleurs.entrySet()) {
+        for (Map.Entry<Integer, Card> entry : listeDesImages.entrySet()) {
             int cle = entry.getKey();
             Card value = entry.getValue();
 
-            for (int i = 0; i < listeDesCouleurs.size(); i++) {
+            for (int i = 0; i < listeDesImages.size(); i++) {
                 value.getButton().setWidth(widthCarte);
                 value.getButton().setHeight(heightCarte);
-                value.getButton().setBackgroundColor(Color.GRAY);
+                value.getButton().setBackgroundColor(Color.LTGRAY);
                 value.getButton().setTypeface(font);
                 value.getButton().setOnClickListener(new ClickActionListener());
             }
@@ -113,63 +116,86 @@ public class GameActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Méthode mélangeant les cartes aléatoirement au début de chaque partie.
+     * @param map
+     * @param r
+     */
     private void melangeCartes(HashMap<Integer,Card> map, Random r) {
 
-        Couleur bleu = new Couleur(Color.BLUE);
-        Couleur rouge = new Couleur(Color.RED);
-        Couleur vert = new Couleur(Color.GREEN);
+        /**
+         * Initialisation images et sons des cartes.
+         */
+        Image img1 = new Image(R.drawable.sugar_maroon5);
+        Image img2 = new Image(R.drawable.bailand_enrique_iglesias);
+        Image img3 = new Image(R.drawable.born_in_babylon);
         int son1 = R.raw.morceau1;
         int son2 = R.raw.morceau2;
         int son3 = R.raw.morceau3;
 
-        HashMap<Couleur, Integer> listeCouleurEtSonAssocie = new HashMap<>();
-        listeCouleurEtSonAssocie.put(bleu, son1);
-        listeCouleurEtSonAssocie.put(rouge, son2);
-        listeCouleurEtSonAssocie.put(vert, son3);
+        /**
+         * On stocke tout dans des HashMaps
+         */
+        HashMap<Image, Integer> listeImgEtSonAssocie = new HashMap<>();
+        listeImgEtSonAssocie.put(img1, son1);
+        listeImgEtSonAssocie.put(img2, son2);
+        listeImgEtSonAssocie.put(img3, son3);
 
-        ArrayList<Couleur> listeCouleurs = new ArrayList<Couleur>();
-        listeCouleurs.add(bleu);
-        listeCouleurs.add(rouge);
-        listeCouleurs.add(vert);
+        ArrayList<Image> listeImages = new ArrayList<Image>();
+        listeImages.add(img1);
+        listeImages.add(img2);
+        listeImages.add(img3);
 
+        /**
+         * Distribution aléatoire
+         */
         for (Card carte : map.values()) {
 
-            int indiceRandom = r.nextInt(listeCouleurs.size());
-            Couleur c = listeCouleurs.get(indiceRandom);
-            int idAudio = listeCouleurEtSonAssocie.get(c);
-            int reste = c.getReste();
-            c.setReste(--reste);
+            int indiceRandom = r.nextInt(listeImages.size());
+            Image img = listeImages.get(indiceRandom);
+            int idAudio = listeImgEtSonAssocie.get(img);
+            int reste = img.getReste();
+            img.setReste(--reste);
 
-            if (c.getReste() == 0) {
-                listeCouleurs.remove(indiceRandom);
+            if (img.getReste() == 0) {
+                listeImages.remove(indiceRandom);
             }
 
-            carte.setColorAndAudio(c.getColor(), idAudio);
+            carte.setImgAndAudio(img.getImage(), idAudio);
 
         }
     }
 
+    /**
+     * Écouteurs
+     */
     private class ClickActionListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
             score++;
+            // Pour ne pas cliquer sur deux boutons en même temps
             if (SystemClock.elapsedRealtime() - timeLast < 1000) {
                 return;
             }
             timeLast = SystemClock.elapsedRealtime();
 
             tournerCarte(v.getId());
-            playSound(listeDesCouleurs.get(v.getId()).getAudioId());
+            playSound(listeDesImages.get(v.getId()).getAudioId());
 
         }
 
+        /**
+         * Permet de retourner une carte
+         * @param id
+         */
         private void tournerCarte(int id) {
 
-            int color = listeDesCouleurs.get(id).getColor();
+            int color = listeDesImages.get(id).getColor();
+            int image = listeDesImages.get(id).getImageId();
             final Button tmp = (Button) findViewById(id);
-            tmp.setBackgroundColor(color);
-
+            tmp.setBackgroundColor(Color.BLACK);
+            tmp.setTextColor(Color.WHITE);
             identifiants.add(tmp);
 
 
@@ -200,70 +226,85 @@ public class GameActivity extends ActionBarActivity {
             }.start();
         }
 
+        /**
+         * Identifie les boutons non utilisés dans la grille
+         * @param id
+         * @return
+         */
         private HashMap<Integer, Card> getBoutonNonUtilise(int id) {
             HashMap<Integer, Card> ret = new HashMap<>();
-            for (Card c : listeDesCouleurs.values()) {
+            for (Card c : listeDesImages.values()) {
                 if (c.getId() != id)
                     ret.put(id, c);
             }
             return ret;
         }
 
+        /**
+         * Lorsque le jeu est terminé, on appelle cette méthode
+         * @return
+         */
         private boolean isGameFinished() {
-            for (Card c : listeDesCouleurs.values()) {
-                int idCard = c.getId();
-                Button b = (Button) findViewById(idCard);
-                ColorDrawable couleurDuBouton = (ColorDrawable) b.getBackground();
-                int colorId = couleurDuBouton.getColor();
-                if (colorId == Color.GRAY) return false;
-            }
-            return true;
+
+            if (cartesRetournees == 0)
+                return true;
+            return false;
         }
 
         private void bloquerBouton() {
-            for (Card c : listeDesCouleurs.values()) {
+            for (Card c : listeDesImages.values()) {
                 Button tmp = (Button) findViewById(c.getId());
-                if (!c.isCardFind())
+                if (!c.isCardFound())
                     tmp.setEnabled(false);
             }
         }
 
         private void deBloquerBouton() {
-            for (Card c : listeDesCouleurs.values()) {
+            for (Card c : listeDesImages.values()) {
                 Button tmp = (Button) findViewById(c.getId());
-                if (!c.isCardFind())
+                if (!c.isCardFound())
                     tmp.setEnabled(true);
             }
         }
 
+        /**
+         * Vérifie si deux cartes retournées sont identiques
+         */
         private void checkCartesIdentiques() {
 
             int id1 = identifiants.get(0).getId();
             int id2 = identifiants.get(1).getId();
-            if (listeDesCouleurs.get(id1).getColor() != listeDesCouleurs.get(id2).getColor()) {
-                identifiants.get(0).setBackgroundColor(Color.GRAY);
-                identifiants.get(1).setBackgroundColor(Color.GRAY);
-                listeDesCouleurs.get(id1).setIsCardFind(false);
-                listeDesCouleurs.get(id2).setIsCardFind(false);
+            if (listeDesImages.get(id1).getImageId() != listeDesImages.get(id2).getImageId()) {
+                identifiants.get(0).setBackgroundColor(Color.LTGRAY);
+                identifiants.get(1).setBackgroundColor(Color.LTGRAY);
+                identifiants.get(0).setTextColor(Color.BLACK);
+                identifiants.get(1).setTextColor(Color.BLACK);
+                listeDesImages.get(id1).setIsCardFound(false);
+                listeDesImages.get(id2).setIsCardFound(false);
             } else {
-                listeDesCouleurs.get(id1).setIsCardFind(true);
-                listeDesCouleurs.get(id2).setIsCardFind(true);
-                bloquerTrouver(listeDesCouleurs.get(id1));
-                bloquerTrouver(listeDesCouleurs.get(id2));
+                listeDesImages.get(id1).setIsCardFound(true);
+                listeDesImages.get(id2).setIsCardFound(true);
+                cartesRetournees -= 2;
+                listeDesImages.get(id1).getButton().setText("              ");
+                listeDesImages.get(id2).getButton().setText("              ");
+                listeDesImages.get(id1).getButton().setBackgroundResource(listeDesImages.get(id1).getImageId());
+                listeDesImages.get(id2).getButton().setBackgroundResource(listeDesImages.get(id2).getImageId());
+                bloquerTrouve(listeDesImages.get(id1));
+                bloquerTrouve(listeDesImages.get(id2));
             }
         }
 
-        private HashMap<Integer, Card> getButtonTrouver() {
+        private HashMap<Integer, Card> getButtonTrouve() {
             HashMap<Integer, Card> ret = new HashMap<>();
-            for (Card c : listeDesCouleurs.values()) {
-                if (c.isCardFind() == true)
+            for (Card c : listeDesImages.values()) {
+                if (c.isCardFound() == true)
                     ret.put(c.getId(), c);
             }
             return null;
         }
 
-        private void bloquerTrouver(Card c) {
-            if (c.isCardFind()) {
+        private void bloquerTrouve(Card c) {
+            if (c.isCardFound()) {
                 Button b = (Button) findViewById(c.getId());
                 b.setEnabled(false);
             }

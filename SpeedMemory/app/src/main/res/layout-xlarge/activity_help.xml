@@ -13,13 +13,14 @@
         android:id="@+id/textView"
         android:textSize="90px"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#000" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RETOUR"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:id="@+id/button3"
         android:layout_alignParentBottom="true" />
 
@@ -30,6 +31,9 @@
         android:gravity="center"
         android:id="@+id/modeDeJeu"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textIsSelectable="false"
+        android:textSize="40dp"
+        android:textColor="#000" />
 
 </RelativeLayout>

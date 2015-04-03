@@ -51,9 +51,7 @@ public class MainActivity extends ActionBarActivity {
                 if(result == TextToSpeech.LANG_NOT_SUPPORTED || result == TextToSpeech.LANG_MISSING_DATA) {
                     Toast.makeText(getApplicationContext(), "Votre appareil ne supporte pas cette version", Toast.LENGTH_SHORT).show();
                 }
-                else {
-                    textToSpeech.speak("Commencer jeu", TextToSpeech.QUEUE_FLUSH, null);
-                }
+
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
