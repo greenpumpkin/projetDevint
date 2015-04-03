@@ -3,7 +3,12 @@ package com.devint.cindy.speedmemory;
 
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
 /**
+ * Describes a card.
  * Created by Cindy Najjar on 10/03/15.
  */
 
@@ -19,7 +24,7 @@ public class Card {
 
 
     /**
-     * Constructeur 1
+     * Constructor 1
      * @param id
      * @param audio
      * @param button
@@ -32,7 +37,7 @@ public class Card {
     }
 
     /**
-     * Constructeur 2
+     * Constructor 2
      * @param id
      * @param audio
      * @param imageId
@@ -44,6 +49,56 @@ public class Card {
         this.button = button;
         this.imageId = imageId;
         this.isFound = false;
+    }
+
+    /**
+     * Cards are mixed randomly at each game beggining
+     * @param map
+     * @param r
+     */
+    public static void mixCards(HashMap<Integer,Card> map, Random r) {
+
+        /**
+         * Initialisation images et sons des cartes.
+         */
+        Image img1 = new Image(R.drawable.sugar_maroon5);
+        Image img2 = new Image(R.drawable.bailand_enrique_iglesias);
+        Image img3 = new Image(R.drawable.born_in_babylon);
+        int son1 = R.raw.morceau1;
+        int son2 = R.raw.morceau2;
+        int son3 = R.raw.morceau3;
+
+        /**
+         * Everything stocked in HashMaps
+         */
+        HashMap<Image, Integer> imgAndSndList = new HashMap<>();
+        imgAndSndList.put(img1, son1);
+        imgAndSndList.put(img2, son2);
+        imgAndSndList.put(img3, son3);
+
+        ArrayList<Image> list = new ArrayList<Image>();
+        list.add(img1);
+        list.add(img2);
+        list.add(img3);
+
+        /**
+         * Random distribution
+         */
+        for (Card carte : map.values()) {
+
+            int indiceRandom = r.nextInt(list.size());
+            Image img = list.get(indiceRandom);
+            int idAudio = imgAndSndList.get(img);
+            int reste = img.getRest();
+            img.setRest(--reste);
+
+            if (img.getRest() == 0) {
+                list.remove(indiceRandom);
+            }
+
+            carte.setImgAndAudio(img.getImage(), idAudio);
+
+        }
     }
 
     // GETTERS & SETTERS //
