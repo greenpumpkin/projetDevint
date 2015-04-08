@@ -1,8 +1,8 @@
-SpeedMemory/*.properties
-SpeedMemory/Devint/app/build/intermediates/assets
-SpeedMemory/app/app.iml
-.idea/workspace.xml
-SpeedMemory/.idea/workspace.xml
-SpeedMemory/app/.idea/workspace.xml
-SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/assets
+#SpeedMemory/*.properties
+#SpeedMemory/Devint/app/build/intermediates/assets
+#SpeedMemory/app/app.iml
+#.idea/workspace.xml
+#SpeedMemory/.idea/workspace.xml
+#SpeedMemory/app/.idea/workspace.xml
+#SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/assets
 
