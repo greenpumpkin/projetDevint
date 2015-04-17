@@ -11,7 +11,8 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,17 +22,14 @@
         <activity
             android:name=".GameActivity"
             android:screenOrientation="landscape"
-            android:label="@string/title_activity_game" >
+            android:label="@string/title_activity_game"
+            android:launchMode="singleTask" >
         </activity>
         <activity
             android:name=".HelpActivity"
             android:screenOrientation="landscape"
-            android:label="@string/title_activity_help" >
-        </activity>
-        <activity
-            android:name=".ModeDeJeuActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/title_activity_ModeJeu" >
+            android:label="@string/title_activity_help"
+            android:launchMode="singleTask" >
         </activity>
     </application>
 

@@ -1,6 +1,7 @@
 package com.devint.cindy.speedmemory;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
 
     private int result;
     public static TextToSpeech textToSpeech;
+    private SharedPreferences prefs;
 
     private final String textModeDeJeu = "Le jeu propose une grille composée de plusieurs cartes. " +
             "Chaque carte est associée à un morceau de musique qui est dévoilé lorsque vous cliquez dessus. " +
@@ -28,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        prefs = getSharedPreferences();
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -53,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
                 }
 
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -69,6 +72,7 @@ public class MainActivity extends ActionBarActivity {
                     textToSpeech.speak(textModeDeJeu, TextToSpeech.QUEUE_FLUSH, null);
                 }
                 Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });

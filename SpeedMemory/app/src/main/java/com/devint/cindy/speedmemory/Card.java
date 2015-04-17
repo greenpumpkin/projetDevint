@@ -33,7 +33,6 @@ public class Card {
         this.id = id;
         this.audioId = audio;
         this.button = button;
-        this.isFound = false;
     }
 
     /**
@@ -48,7 +47,6 @@ public class Card {
         this.audioId = audio;
         this.button = button;
         this.imageId = imageId;
-        this.isFound = false;
     }
 
     /**

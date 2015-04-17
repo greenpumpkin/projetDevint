@@ -1,5 +1,6 @@
 package com.devint.cindy.speedmemory;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -33,8 +34,7 @@ public class GameActivity extends ActionBarActivity {
     private MediaPlayer mPlayer;
     private int score;
     private long timeLast = 0;
-    private int returnedCards;
-
+    private int turnedCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class GameActivity extends ActionBarActivity {
         b6 = (Button) findViewById(R.id.carte6);
         imgList.put(b6.getId(), new Card(b6.getId(), R.raw.morceau3, b6));
 
-        returnedCards = imgList.size();
+        turnedCards = imgList.size();
 
         Card.mixCards(imgList, random);
 
@@ -72,13 +72,12 @@ public class GameActivity extends ActionBarActivity {
         heightCarte = height / 4;
 
         for (Map.Entry<Integer, Card> entry : imgList.entrySet()) {
-            int cle = entry.getKey();
             Card value = entry.getValue();
 
             for (int i = 0; i < imgList.size(); i++) {
                 value.getButton().setWidth(widthCarte);
                 value.getButton().setHeight(heightCarte);
-                value.getButton().setBackgroundColor(Color.LTGRAY);
+                value.getButton().setBackgroundColor(Color.GRAY);
                 value.getButton().setTypeface(font);
                 value.getButton().setOnClickListener(new ClickActionListener());
             }
@@ -138,8 +137,6 @@ public class GameActivity extends ActionBarActivity {
          */
         private void turnCards(int id) {
 
-            int color = imgList.get(id).getColor();
-            int image = imgList.get(id).getImageId();
             final Button tmp = (Button) findViewById(id);
             tmp.setBackgroundColor(Color.BLACK);
             tmp.setTextColor(Color.WHITE);
@@ -149,6 +146,10 @@ public class GameActivity extends ActionBarActivity {
             countDownTimer = new CountDownTimer(5000, 1) {
                 @Override
                 public void onTick(long millisUntilFinished) {
+                    if (identifiants.size() == 2) {
+                        getUnusedButton();
+                        lockCards();
+                    }
                 }
 
                 @Override
@@ -156,6 +157,7 @@ public class GameActivity extends ActionBarActivity {
 
                     if (identifiants.size() == 2) {
                         checkCards();
+                        unlockCards();
                         identifiants.clear();
                     }
                     if (isGameFinished()) {
@@ -165,23 +167,11 @@ public class GameActivity extends ActionBarActivity {
 
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
+                        //Intent intent = new Intent(GameActivity.this, FinalActivity.class);
+                        //startActivity(intent);
                     }
                 }
             }.start();
-        }
-
-        /**
-         * Identifies buttons that are not used in the grid
-         * @param id
-         * @return
-         */
-        private HashMap<Integer, Card> getUnusedButton(int id) {
-            HashMap<Integer, Card> ret = new HashMap<>();
-            for (Card c : imgList.values()) {
-                if (c.getId() != id)
-                    ret.put(id, c);
-            }
-            return ret;
         }
 
         /**
@@ -190,7 +180,7 @@ public class GameActivity extends ActionBarActivity {
          */
         private boolean isGameFinished() {
 
-            if (returnedCards == 0)
+            if (turnedCards == 0)
                 return true;
             return false;
         }
@@ -203,16 +193,16 @@ public class GameActivity extends ActionBarActivity {
             int id1 = identifiants.get(0).getId();
             int id2 = identifiants.get(1).getId();
             if (imgList.get(id1).getImageId() != imgList.get(id2).getImageId()) {
-                identifiants.get(0).setBackgroundColor(Color.LTGRAY);
-                identifiants.get(1).setBackgroundColor(Color.LTGRAY);
+                /* the two cards are not the same, same state as in  the begginning */
+                identifiants.get(0).setBackgroundColor(Color.GRAY);
+                identifiants.get(1).setBackgroundColor(Color.GRAY);
                 identifiants.get(0).setTextColor(Color.BLACK);
                 identifiants.get(1).setTextColor(Color.BLACK);
-                imgList.get(id1).setIsCardFound(false);
-                imgList.get(id2).setIsCardFound(false);
             } else {
+                /* the two cards are the same, we display the images associated to the cards */
                 imgList.get(id1).setIsCardFound(true);
                 imgList.get(id2).setIsCardFound(true);
-                returnedCards -= 2;
+                turnedCards -= 2;
                 imgList.get(id1).getButton().setText("              ");
                 imgList.get(id2).getButton().setText("              ");
                 imgList.get(id1).getButton().setBackgroundResource(imgList.get(id1).getImageId());
@@ -222,13 +212,59 @@ public class GameActivity extends ActionBarActivity {
             }
         }
 
-        private void lockFound(Card c) {
-            if (c.isCardFound()) {
-                Button b = (Button) findViewById(c.getId());
-                b.setEnabled(false);
+        /**
+         * Identifies buttons that are not used in the grid
+         * @return ret
+         *
+         */
+        private HashMap<Integer, Card> getUnusedButton() {
+            HashMap<Integer, Card> ret = new HashMap<>();
+            for (Card c : imgList.values()) {
+                if ((c.getId() != identifiants.get(0).getId()) && (c.getId() != identifiants.get(1).getId()))
+                    /* here the cards are different from the 2 selected */
+                    ret.put(c.getId(), c);
+            }
+            return ret;
+        }
+
+
+        /**
+         * Lock the cards that are unused
+         */
+        private void lockCards() {
+
+            for (Card c : getUnusedButton().values() ) {
+                c.getButton().setClickable(false);
             }
         }
 
+        /**
+         * Unlock the unused cards
+         */
+        private void unlockCards() {
+
+            for (Card c : getUnusedButton().values()) {
+                c.getButton().setClickable(true);
+            }
+            /* refreshing of the map of unused buttons */
+            getUnusedButton().clear();
+        }
+
+        /**
+         * Lock cards that are "found" in pairs
+         * @param c
+         */
+        private void lockFound(Card c) {
+            if (c.isCardFound()) {
+                Button b = (Button) findViewById(c.getId());
+                b.setClickable(false);
+            }
+        }
+
+        /**
+         * Play music associated to the button.
+         * @param resId
+         */
         private void playSound(int resId) {
             if(mPlayer != null) {
                 mPlayer.stop();
