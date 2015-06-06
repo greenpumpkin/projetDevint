@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.devint.cindy.speedmemory.activities.EasyGameActivity"
+    android:gravity="center">
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="2"
+        android:layout_above="@+id/scoreLabel"
+        android:layout_alignLeft="@+id/scoreLabel"
+        android:layout_alignStart="@+id/scoreLabel">
+
+        <Button
+            android:id="@+id/carte1"
+            android:text="SPEED\n MEMORY"
+            android:textSize="23px"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/carte2"
+            android:text="SPEED\n MEMORY"
+            android:textSize="23px"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/carte3"
+            android:text="SPEED\n MEMORY"
+            android:textSize="23px"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/carte4"
+            android:text="SPEED\n MEMORY"
+            android:textSize="23px"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/carte5"
+            android:text="SPEED\n MEMORY"
+            android:textSize="23px"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/carte6"
+            android:text="SPEED\n MEMORY"
+            android:textSize="23px"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+    </GridLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score : "
+        android:id="@+id/scoreLabel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/score"
+        android:layout_alignBottom="@+id/time"
+        android:layout_toRightOf="@+id/scoreLabel"
+        android:layout_toEndOf="@+id/scoreLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/time"
+        android:layout_alignBottom="@+id/scoreLabel"
+        android:layout_alignRight="@+id/gridLayout"
+        android:layout_alignEnd="@+id/gridLayout" />
+</RelativeLayout>

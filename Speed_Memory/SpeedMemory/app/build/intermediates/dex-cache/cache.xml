@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-f1af2bbe26c181b5e2a2284504f4945c829b6df4.jar" />
+    </item>
+    <item
+        jar="/home/user/devint/projetDevint/SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/user/devint/projetDevint/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-e933404df7ef6a9abc014fd2b14ed745beb57f28.jar" />
+    </item>
+    <item
+        jar="/home/user/devint/projetDevint/SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/user/devint/projetDevint/SpeedMemory/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-d573f4de75583e8246253baa89eec89282066738.jar" />
+    </item>
+    <item
+        jar="/home/user/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/home/user/devint/projetDevint/SpeedMemory/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-93fb9718a1ed4ac2b4772a1536aed85009636b4f.jar" />
+    </item>
+    <item
+        jar="/home/user/devint/projetDevint/SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/user/devint/projetDevint/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-d1e0b909e914055862a6d8be4c1dd5361735080c.jar" />
+    </item>
+    <item
+        jar="/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-a0e79463390fc3d77b94316919b86ffe3bed96e1.jar" />
+    </item>
+    <item
+        jar="/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-1704328563f8cf063fe7cec27ead3aacb2979a97.jar" />
+    </item>
+
+</items>

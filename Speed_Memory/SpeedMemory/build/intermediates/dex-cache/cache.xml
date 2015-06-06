@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/user/Dropbox/Devint/SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/user/Dropbox/Devint/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-2fb8b5d28d8ea339d586f653ac209a01370732f2.jar" />
+    </item>
+    <item
+        jar="/home/user/Dropbox/Devint/SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/user/Dropbox/Devint/SpeedMemory/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0281f26879f0ebe774ed3a83f311ac1d3846e1b8.jar" />
+    </item>
+    <item
+        jar="/home/user/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/home/user/Dropbox/Devint/SpeedMemory/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-93fb9718a1ed4ac2b4772a1536aed85009636b4f.jar" />
+    </item>
+    <item
+        jar="/home/user/Dropbox/Devint/SpeedMemory/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/user/Dropbox/Devint/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-567364e70b152d07b4443a2b83bf828a695cbcfc.jar" />
+    </item>
+
+</items>

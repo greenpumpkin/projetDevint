@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.devint.cindy.speedmemory" >
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.EasyGameActivity"
+            android:label="Niveau 1"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".activities.HelpActivity"
+            android:label="Aide"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".activities.FinalActivity"
+            android:label="Fin !"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".activities.OptionsActivity"
+            android:label="Options"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".activities.HardGameActivity"
+            android:label="Niveau 3"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".activities.MediumGameActivity"
+            android:label="Niveau 2"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".activities.ClassementActivity"
+            android:label="Classement"
+            android:screenOrientation="landscape">
+        </activity>
+    </application>
+
+</manifest>

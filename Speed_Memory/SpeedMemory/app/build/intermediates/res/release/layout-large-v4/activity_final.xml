@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.devint.cindy.speedmemory.activities.FinalActivity">
+
+    <TextView
+        android:id="@+id/textfinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="50px"
+        android:gravity="center"
+        android:layout_centerInParent="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RETOUR AU MENU"
+        android:id="@+id/buttonGoBack"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/textfinal"
+        android:layout_toEndOf="@+id/textfinal" />
+
+</RelativeLayout>
+<!-- From: file:/home/user/AndroidStudioProjects/SpeedMemory/app/src/main/res/layout-large/activity_final.xml -->

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<infos>
+  <year><![CDATA[2015]]></year>
+  <gamecategories>
+    <gamecategory><![CDATA[Arcade]]></gamecategory>
+  </gamecategories>
+  <shortdescription><![CDATA[Speed Memory est un jeu de mémoire, mais aussi de rapidité qui sera développé en tant qu'une aplication Android.]]></shortdescription>
+  <public><![CDATA[MV]]></public>
+  <gamestate><![CDATA[Valider pour le CD]]></gamestate>
+  <age><![CDATA[tous âges]]></age>
+  <title><![CDATA[Speed Memory]]></title>
+  <authors>
+    <author><![CDATA[Cindy Najjar, Aina Rapenomanana, Jean-Loïc Mugnier, Salah Dahmoul]]></author>
+  </authors>
+  <notes>
+		<note> <![CDATA[Speed Memory est une application Android, installable sur smartphone et tablette Android.]]></note>
+		<note> <![CDATA[<a href="notice_de_jeu.pdf">description </a>]]></note>
+		<note> <![CDATA[<a href="SpeedMemory.apk"> Téléchargez le fichier Apk pour installer l'application</a>]]></note>	
+	</notes>
+  <gameplay><![CDATA[Le jeu propose une grille divisée en plusieurs cases de différentes couleurs (dont le nombre peut varier suivant le niveau de difficulté choisi).]]></gameplay>
+  <gamerules><![CDATA[Chaque case correspond à un morceau de musique qui est dévoilé à l'utilisateur lorsque celui-ci clique sur la case. Il faut savoir que chaque morceau a son double, quelque part caché dans la grille.]]></gamerules>
+</infos>
+

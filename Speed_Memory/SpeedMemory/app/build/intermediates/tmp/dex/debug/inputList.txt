@@ -1,0 +1,5 @@
+/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/classes/debug
+/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-93fb9718a1ed4ac2b4772a1536aed85009636b4f.jar
+/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-1704328563f8cf063fe7cec27ead3aacb2979a97.jar
+/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-a0e79463390fc3d77b94316919b86ffe3bed96e1.jar
+/home/user/AndroidStudioProjects/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-f1af2bbe26c181b5e2a2284504f4945c829b6df4.jar

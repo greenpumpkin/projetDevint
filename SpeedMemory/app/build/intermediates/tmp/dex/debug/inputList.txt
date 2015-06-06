@@ -1,5 +1,0 @@
-/home/user/projetDevint/SpeedMemory/app/build/intermediates/classes/debug
-/home/user/projetDevint/SpeedMemory/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-93fb9718a1ed4ac2b4772a1536aed85009636b4f.jar
-/home/user/projetDevint/SpeedMemory/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-d401b645c4dd19b7b0641be9728c2e9cd77286e2.jar
-/home/user/projetDevint/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-c88e9a169f945d9c9cc0887455195ab4bd4979bb.jar
-/home/user/projetDevint/SpeedMemory/app/build/intermediates/pre-dexed/debug/classes-acbf00ba4e4f023322e9f17d30c6cd862f2a062c.jar
